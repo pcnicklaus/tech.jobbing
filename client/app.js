@@ -5,12 +5,12 @@ app.config(function($routeProvider, $authProvider, $locationProvider) {
   // *** satellizer settings *** //
   $authProvider.github({
     url: '/auth/github',
-    clientId: 'UPDATE ME',
+    clientId: '3083c693b2f00af76cf4',
     redirectUri: window.location.origin
   });
   $authProvider.google({
     url: '/auth/google',
-    clientId: 'UPDATE ME',
+    clientId: '387733802006-t8ge692s6hna68n6tk0pjol5can9mg8d.apps.googleusercontent.com',
     redirectUri: window.location.origin,
   });
   $authProvider.instagram({
@@ -18,6 +18,18 @@ app.config(function($routeProvider, $authProvider, $locationProvider) {
     clientId: 'UPDATE ME',
     redirectUri: window.location.origin,
   });
+
+  $authProvider.facebook({
+       url: '/auth/facebook',
+       clientId: '860516007380790',
+       redirectUri: window.location.origin
+     });
+
+  $authProvider.twitter({
+       url: '/auth/twitter',
+       clientId: 'FQHN1BJSpb5zzRd1MCQ02ks9d',
+       redirectUri: window.location.origin
+     });
 
   $routeProvider
     .when('/', {
