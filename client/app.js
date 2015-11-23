@@ -72,6 +72,10 @@ app.config(function ($routeProvider, $authProvider, $locationProvider) {
                 restricted: true
             }
         })
+        .when('/navigation', {
+            templateUrl: 'partials/navigation.html',
+            controller: 'navigationCtrl'
+        })
         .otherwise('/');
 
 });
