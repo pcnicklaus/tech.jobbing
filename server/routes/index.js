@@ -66,8 +66,17 @@ router.post('/detail', function(req, res, next) {
             });
             // res.send(jobs);
         }
-        console.log(res.send(jobDetail));
+        console.log(jobDetail);
+        res.send(jobDetail);
     });
+});
+
+router.post('/glassdoor', function(req, res, next) {
+
+
+    url = "http://api.glassdoor.com/api/api.htm?t.p=49627&t.k=h7qO3cGBOJ1&userip=127.0.0.1&useragent=&format=json&v=1&action=jobs-stats&city=denver&jt=developer&returnJobTitles=true&q=developer&minRating=3&admLevelRequested=1";
+
+
 });
 
 module.exports = router;
