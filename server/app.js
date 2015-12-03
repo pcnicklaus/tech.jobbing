@@ -11,6 +11,9 @@ var mongoose = require('mongoose');
 var config = require('../_config');
 
 
+// connect to mongo
+mongoose.connect("mongodb://localhost/lazyJobs");
+
 // *** express instance *** //
 var app = express();
 
@@ -29,11 +32,15 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 
 // *** mongoose ** //
-mongoose.connect(config.MONGO_URI);
+// mongoose.connect(config.MONGO_URI);
 
 // *** main routes *** //
 app.use('/', mainRoutes);
 app.use('/auth', authRoutes);
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../../client/index.html'));
+});
 
 
 // *** handle 404 error *** //

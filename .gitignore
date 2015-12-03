@@ -3,4 +3,4 @@ node_modules/
 npm-debug.log
 _config.js
 capstone.md
-readme.md
+bower_components

@@ -1,0 +1,28 @@
+<div class="container">
+
+    <input type="text" ng-model="job.city" placeholder="where do you wanna work">
+
+    <input type="text" ng-model="job.title"placeholder="what do you wanna do?">
+
+    <input type="text" ng-model="job.keywords" placeholder="anything special we should be on the lookout for?">
+
+    <button type="submit" class="btn btn-lg btn-block btn-primary" ng-click="searchCraigsList()">Get 'em rover</button>
+
+</div>
+
+<div class="container">
+  <ul ng-repeat="job in craigslistData">
+    <li> {{job.title}} - {{job.url}}</li>
+  </ul>
+</div>
+<!--
+https://angel.co/jobs#find/f!%7B%22locations%22%3A%5B%22Denver%22%5D%2C%22types%22%3A%5B%22full-time%22%5D%7D
+
+github jobs
+https://jobs.github.com/positions?description=&location=denver
+
+https://jobs.github.com/positions?description=javascript+junior&location=
+
+https://authenticjobs.com/#types=7,1,3&location=ll_39.756670899999996,-104.97341469999999
+https://authenticjobs.com/#types=7,1,3&search=javascript%20junior
+ -->

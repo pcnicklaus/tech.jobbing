@@ -72,19 +72,19 @@ app.config(function ($routeProvider, $authProvider, $locationProvider) {
                 restricted: true
             }
         })
-        .when('/navigation', {
-            templateUrl: 'partials/navigation.html',
-            controller: 'navigationCtrl'
-        })
-        .otherwise('/');
+        .when('/jobs', {
+            templateUrl: 'partials/jobs.html',
+            controller: 'jobsCtrl'
+        });
+        // .otherwise('/');
 
 });
 
-app.run(function ($rootScope, $location, $route, $auth) {
-    $rootScope.$on('$routeChangeStart', function (event, next, current) {
-        if (next.access.restricted && !$auth.isAuthenticated()) {
-            $location.path('/login');
-            $route.reload();
-        }
-    });
-});
+// app.run(function ($rootScope, $location, $route, $auth) {
+//     $rootScope.$on('$routeChangeStart', function (event, next, current) {
+//         if (next.access.restricted && !$auth.isAuthenticated()) {
+//             $location.path('/login');
+//             $route.reload();
+//         }
+//     });
+// });

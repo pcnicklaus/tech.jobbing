@@ -11,7 +11,7 @@ var cors = require('cors');
 var request = require('request');
 
 var config = require('../../_config');
-var User = require('../models/user.js');
+var User = require('../models/users.js');
 
 
 // *** login required *** //
