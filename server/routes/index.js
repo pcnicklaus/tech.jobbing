@@ -44,36 +44,29 @@ router.post('/detail', function(req, res, next) {
             var $ = cheerio.load(html);
 
             var jobDetail = {
-                title: '',
-                description: '',
-                compensation: '',
-                contactInfo: {
-                    phone: null,
-                    email: null
-                },
-                imageUrl: null
-            };
+                    title: '',
+                    description: '',
+                    compensation: '',
+                    url: url
+                };
 
             $('span.postingtitletext').filter(function(){
                 var data = $(this);
-                console.log(data.text());
-                jobDetail.title = data;
+                jobDetail.title = data.text();
+            });
 
-                // title = data.text();
-                // link = data.attr('href');
-                // holder = title + ' ' + link;
-                // jobs.push(holder);
-                // console.log(title, link, 'link');
-                // link = data.parent().text();
-                // console.log(link)
-                // test = data.parent().parent().text
-                // console.log(test)
-                // title = data.children().first().text();
+            $('#postingbody').filter(function () {
+                var data = $(this);
+                jobDetail.description = data.text();
+            });
 
-                // json.title = title;
+            $('p.attrgroup').filter(function() {
+                var data = $(this);
+                jobDetail.compensation = data.children().first().text();
             });
             // res.send(jobs);
         }
+        console.log(res.send(jobDetail));
     });
 });
 

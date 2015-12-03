@@ -44,6 +44,7 @@ app.controller('jobsCtrl', function ($scope, $auth, $location, $http) {
       $http.post('/detail', payload)
           .success(function (data) {
               jobDetail = data;
+              console.log(jobDetail)
           })
           .error(function (err) {
               console.log(err, " error");
