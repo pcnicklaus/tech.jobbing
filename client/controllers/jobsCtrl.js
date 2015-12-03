@@ -4,6 +4,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
   var scrapedData = [];
 
+  // scrape the titles and url 60 off craiglist
   $scope.searchCraigsList = function () {
     $http.get('/scrape')
         .success(function(data) {
@@ -37,8 +38,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
       }
   };
 
-  // function to post to the backend the url and bring back some scraped data of the job detail page.
-
+  // craiglist job detail scrape
   $scope.searchDetail = function () {
       var payload = {url: this.job.url};
       $http.post('/detail', payload)
@@ -51,7 +51,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
           });
   };
 
-
+  // open the modal for craigslist scrape button
   $scope.openModal = function () {
       var modalInstance = $uibModal.open({
          templateUrl: 'partials/modalTemplate.html',
@@ -61,5 +61,39 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
        });
    };
 
+   // grab data from indeed from the backend route
+   $scope.getIndeed = function () {
+      var payload = {};
+      $http.post('/indeed', payload)
+          .success(function (data) {
+              console.log(data.results);
+          })
+          .error(function (err) {
+              console.log(err, ' error');
+          });
+   };
+
+
+   $scope.getDice = function () {
+      var payload = {};
+      $http.post('/dice', payload)
+          .success(function (data) {
+              console.log(data.resultItemList);
+          })
+          .error(function (err) {
+              console.log(err, ' error');
+          });
+   };
+
+   // $scope.getDice = function () {
+   //    var payload = {};
+   //    $http.post('/dice', payload)
+   //        .success(function (data) {
+   //            console.log(data.resultItemList);
+   //        })
+   //        .error(function (err) {
+   //            console.log(err, ' error');
+   //        });
+   // };
 
 }]);

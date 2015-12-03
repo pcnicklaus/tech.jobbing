@@ -74,8 +74,15 @@ router.post('/detail', function(req, res, next) {
 router.post('/glassdoor', function(req, res, next) {
 
 
-    url = "http://api.glassdoor.com/api/api.htm?t.p=49627&t.k=h7qO3cGBOJ1&userip=127.0.0.1&useragent=&format=json&v=1&action=jobs-stats&city=denver&jt=developer&returnJobTitles=true&q=developer&minRating=3&admLevelRequested=1";
+    var url = "http://api.glassdoor.com/api/api.htm?t.p=49627&t.k=h7qO3cGBOJ1&userip=127.0.0.1&useragent=&format=json&v=1&action=jobs-stats&city=denver&jt=developer&returnJobTitles=true&q=developer&minRating=3&admLevelRequested=1";
 
+    $http.get(url)
+        .success(function () {
+            console.log(response);
+        })
+        .error(function () {
+            console.log(error);
+        });
 
 });
 
@@ -85,6 +92,18 @@ router.post('/dice', function(req, res, next) {
     // url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript,node&city=80205&sort=1";
     url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript&city=Denver,+CO&sort=1";
 
+       console.log(req.body);
+       // var searchString = req.body.toTranslate;
+       // console.log(searchString);
+       request(url, function (error, data) {
+         if (!error && res.statusCode == 200) {
+           var diceData = data.body;
+           console.log(diceData);
+           res.send(diceData);
+
+         }
+       });
+
 
 });
 
@@ -92,9 +111,28 @@ router.post('/indeed', function(req, res, next) {
 
     // publisher id = 2880064796047261
     // url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript,node&city=80205&sort=1";
-    url = "http://api.indeed.com/ads/apisearch?publisher=2880064796047261&format=json&q=javascript&l=denver%2C+co&sort=date&radius=&st=employer&jt=fulltime&start=&limit=&fromage=10&filter=&latlong=1&co=us&chnl=&userip=127.0.0.1&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
+    url = "http://api.indeed.com/ads/apisearch?publisher=2880064796047261&format=json&q=javascript&l=denver%2C+co&sort=date&radius=&st=employer&jt=fulltime&start=&limit=30&fromage=10&filter=&latlong=1&co=us&chnl=&userip=127.0.0.1&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
 
+      console.log(req.body);
+      // var searchString = req.body.toTranslate;
+      // console.log(searchString);
+      request(url, function (error, data) {
+        if (!error && res.statusCode == 200) {
+          var indeedData = data.body
+          console.log(indeedData);
+          res.send(indeedData);
 
+        }
+      });
+      // request('http://isithackday.com/arrpi.php?text=' + searchString + '?',
 });
+
+
+
+// graphing
+// http://trendyskills.com/?q=keywordDate&keyID[]=915&keyID[]=691&dateFrom=2013/02/17&dateTo=2013/02/24&filterAmbiguous=true&showAmbiguous=
+// http://trendyskills.com/ = trending frameworks
+
+// http://rss.careerjet.co.uk/rss?s=developer%20javascript%20junior&l=Denver&lid=8071&psz=50&snl=100
 
 module.exports = router;
