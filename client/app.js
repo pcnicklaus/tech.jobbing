@@ -1,4 +1,4 @@
-var app = angular.module('MyApp', ['ngRoute', 'satellizer']);
+var app = angular.module('MyApp', ['ngRoute', 'satellizer', 'ui.bootstrap']);
 
 app.config(function ($routeProvider, $authProvider, $locationProvider) {
 
@@ -75,7 +75,12 @@ app.config(function ($routeProvider, $authProvider, $locationProvider) {
         .when('/jobs', {
             templateUrl: 'partials/jobs.html',
             controller: 'jobsCtrl'
+        })
+
+        .when('/jobDetail', {
+            templateUrl: 'partials/modalTemplate.html'
         });
+
         // .otherwise('/');
 
 });
