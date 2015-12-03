@@ -1,19 +1,28 @@
 <div class="container">
-
+  <
     <input type="text" ng-model="job.city" placeholder="where do you wanna work">
 
     <input type="text" ng-model="job.title"placeholder="what do you wanna do?">
 
     <input type="text" ng-model="job.keywords" placeholder="anything special we should be on the lookout for?">
 
-    <button type="submit" class="btn btn-lg btn-block btn-primary" ng-click="searchCraigsList()">Get 'em rover</button>
+    <button class="btn btn-md btn-default" ng-click="searchCraigsList()">Get 'em rover</button>
 
 </div>
 
 <div class="container">
-  <ul ng-repeat="job in craigslistData">
-    <li> {{job.title}} - {{job.url}}</li>
-  </ul>
+  <div class="row">
+    <div ng-repeat="job in craigslistData">
+      <div class="col-xs-10">
+        {{job.title}}
+      </div>
+      <div class="col-xs-2">
+          <button type="submit" class="btn btn-lg btn-block btn-primary" ng-click="searchDetail()">Get 'em rover
+          </button>
+
+      </div>
+    </div>
+  </div>
 </div>
 <!--
 https://angel.co/jobs#find/f!%7B%22locations%22%3A%5B%22Denver%22%5D%2C%22types%22%3A%5B%22full-time%22%5D%7D

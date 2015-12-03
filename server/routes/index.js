@@ -45,9 +45,40 @@ router.get('/scrape', function(req, res, next) {
     });
 });
 
-router.get('/detail', function (req, res, next) {
+router.post('/detail', function(req, res, next) {
 
-    var url = 'http:' +
-})
+    url = req.body.url;
+    console.log(url)
+
+    // request(url, function(error, response, html){
+    //     if(!error){
+    //         var $ = cheerio.load(html);
+
+    //         var title;
+    //         var link;
+    //         var holder;
+    //         var jobs = [];
+
+    //         $('a.hdrlnk').filter(function(){
+    //             var data = $(this);
+    //             // console.log(data, data.attr('href'));
+    //             title = data.text();
+    //             link = data.attr('href');
+    //             holder = title + ' ' + link;
+    //             jobs.push(holder);
+    //             // console.log(title, link, 'link');
+    //             // link = data.parent().text();
+    //             // console.log(link)
+    //             // test = data.parent().parent().text
+    //             // console.log(test)
+    //             // title = data.children().first().text();
+
+    //             // json.title = title;
+    //         });
+    //         console.log(jobs);
+    //         res.send(jobs);
+    //     }
+    // });
+});
 
 module.exports = router;

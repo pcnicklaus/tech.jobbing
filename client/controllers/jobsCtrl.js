@@ -7,13 +7,13 @@ app.controller('jobsCtrl', function ($scope, $auth, $location, $http) {
   $scope.searchCraigsList = function () {
     $http.get('/scrape')
         .success(function(data) {
-        scrapedData = data;
-        limitCraig();
-    })
-    .error(function(err) {
-        console.log(err, 'error');
-    });
- };
+            scrapedData = data;
+            limitCraig();
+        })
+        .error(function(err) {
+            console.log(err, 'error');
+        });
+  };
 
   // helper function to remove the "found more jobs near denver" links...
   var rawCraigData = [];
@@ -31,16 +31,24 @@ app.controller('jobsCtrl', function ($scope, $auth, $location, $http) {
           var title = rawCraigData[i].slice(0, (rawCraigData[i].length - 20));
           var urlFrag = rawCraigData[i].slice((rawCraigData[i].length - 20), rawCraigData[i].length);
           $scope.craigslistData.push({
-            title: title,
-            url: 'https://denver.craigslist.org' + urlFrag
+              title: title,
+              url: 'https://denver.craigslist.org' + urlFrag
           });
       }
   };
 
+  // function to post to the backend the url and bring back some scraped data of the job detail page.
+  var jobDetail;
   $scope.searchDetail = function () {
-
-      $http.post('/detail')
-  }
+      var payload = {url: this.job.url};
+      $http.post('/detail', payload)
+          .success(function (data) {
+              jobDetail = data;
+          })
+          .error(function (err) {
+              console.log(err, " error");
+          });
+  };
 
 
 });
