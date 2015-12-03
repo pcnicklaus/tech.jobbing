@@ -1,4 +1,4 @@
-app.controller('jobsCtrl', function ($scope, $auth, $location, $http) {
+app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal', 'jobDetailService', function ($scope, $auth, $location, $http, $uibModal, jobDetailService) {
 
   $scope.craigslistData = [];
 
@@ -38,13 +38,13 @@ app.controller('jobsCtrl', function ($scope, $auth, $location, $http) {
   };
 
   // function to post to the backend the url and bring back some scraped data of the job detail page.
-  var jobDetail;
+
   $scope.searchDetail = function () {
       var payload = {url: this.job.url};
       $http.post('/detail', payload)
           .success(function (data) {
-              jobDetail = data;
-              console.log(jobDetail)
+              jobDetailService.jobDetail = data;
+              console.log(jobDetailService.jobDetail, 'service');
           })
           .error(function (err) {
               console.log(err, " error");
@@ -52,4 +52,14 @@ app.controller('jobsCtrl', function ($scope, $auth, $location, $http) {
   };
 
 
-});
+  $scope.openModal = function () {
+      var modalInstance = $uibModal.open({
+         templateUrl: 'partials/modalTemplate.html',
+         controller: 'modalCtrl',
+         size: 'lg',
+         backdrop: 'static'
+       });
+   };
+
+
+}]);

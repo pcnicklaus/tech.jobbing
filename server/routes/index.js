@@ -79,4 +79,12 @@ router.post('/glassdoor', function(req, res, next) {
 
 });
 
+router.post('/dice', function(req, res, next) {
+
+
+    url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript,node&city=80205&sort=1";
+
+
+});
+
 module.exports = router;
