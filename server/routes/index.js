@@ -88,7 +88,6 @@ router.post('/glassdoor', function(req, res, next) {
 
 router.post('/dice', function(req, res, next) {
 
-
     // url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript,node&city=80205&sort=1";
     url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript&city=Denver,+CO&sort=1";
 
@@ -100,11 +99,8 @@ router.post('/dice', function(req, res, next) {
            var diceData = data.body;
            console.log(diceData);
            res.send(diceData);
-
          }
-       });
-
-
+    });
 });
 
 router.post('/indeed', function(req, res, next) {
@@ -121,14 +117,30 @@ router.post('/indeed', function(req, res, next) {
           var indeedData = data.body
           console.log(indeedData);
           res.send(indeedData);
-
         }
       });
-      // request('http://isithackday.com/arrpi.php?text=' + searchString + '?',
+
 });
 
 
+// router.post('/trendyskills', function(req, res, next) {
 
+//     // publisher id = 2880064796047261
+//     // url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript,node&city=80205&sort=1";
+//     url = "http://trendyskills.com/?q=keywordDate&keyID[]=915&keyID[]=691&dateFrom=2013/02/17&dateTo=2013/02/24&filterAmbiguous=true&showAmbiguous=";
+
+//       console.log(req.body);
+//       // var searchString = req.body.toTranslate;
+//       // console.log(searchString);
+//       request(url, function (error, data) {
+//         if (!error && res.statusCode == 200) {
+//           var indeedData = data.body
+//           console.log(indeedData);
+//           res.send(indeedData);
+//         }
+//       });
+
+// });
 // graphing
 // http://trendyskills.com/?q=keywordDate&keyID[]=915&keyID[]=691&dateFrom=2013/02/17&dateTo=2013/02/24&filterAmbiguous=true&showAmbiguous=
 // http://trendyskills.com/ = trending frameworks
