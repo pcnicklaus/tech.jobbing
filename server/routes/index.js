@@ -8,8 +8,11 @@ router.get('/scrape', function(req, res, next) {
     // var newDater = new Dater({
     //   location: req.body.location
     // });
+      var city = req.body.city;
+      var title = req.body.title;
 
-    url = 'https://denver.craigslist.org/search/jjj?sort=date&query=web%20developer';
+
+    url = 'https://'+ city + '.craigslist.org/search/jjj?sort=date&query=web%20developer';
 
     request(url, function(error, response, html){
         if(!error){
