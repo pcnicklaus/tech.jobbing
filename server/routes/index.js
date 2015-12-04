@@ -88,20 +88,107 @@ router.post('/glassdoor', function(req, res, next) {
 
 router.post('/dice', function(req, res, next) {
 
+  var jobDetail = {
+             title: '',
+             company: '',
+             description: '',
+             compensation: '',
+             url: '',
+             location: ''
+         };
     // url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript,node&city=80205&sort=1";
     url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript&city=Denver,+CO&sort=1";
 
-       console.log(req.body);
-       // var searchString = req.body.toTranslate;
-       // console.log(searchString);
-       request(url, function (error, data) {
-         if (!error && res.statusCode == 200) {
-           var diceData = data.body;
-           console.log(diceData);
-           res.send(diceData);
-         }
+    // console.log(req.body);
+     // var searchString = req.body.toTranslate;
+     // console.log(searchString);
+    function getSite (url) {
+        return request(url, function (error, data) {
+           if (!error && res.statusCode == 200) {
+             var rawDiceData = data.body;
+             var jsonDiceData = JSON.parse(rawDiceData);
+             var diceJobs = jsonDiceData.resultItemList;
+           }
+        })
+        .then(function (diceData) {
+        for (var i = 0; i < diceJobs.length; i ++) {
+
+             jobDetail.url = diceJobs[i].detailUrl;
+             jobDetail.title = diceJobs[i].jobTitle;
+             jobDetail.location = diceJobs[i].location;
+             jobDetail.company = diceJobs[i].company;
+             console.log(jobDetail);
+
+             request(jobDetail.url, function(error, response, html){
+                 if(!error){
+                     var $ = cheerio.load(html);
+
+                     $('#jobdescSec').filter(function(){
+                         var data = $(this);
+                         jobDetail.description = data.text();
+                     });
+                 }
+
+             });
+        }
+    })
+    .then(function(jobDetail) {
+      res.send(jobDetail);
+    })
+    .catch(function(error) {
+      res.send(error);
     });
+    }
+    getSite(url);
+
 });
+
+// router.post('/dice', function(req, res, next) {
+
+//     // url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript,node&city=80205&sort=1";
+//      var jobDetail = {
+//              title: '',
+//              company: '',
+//              description: '',
+//              compensation: '',
+//              url: '',
+//              location: ''
+//          };
+
+//      url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript&city=Denver,+CO&sort=1";
+//      //empty object
+//      console.log(req.body);
+//      // var searchString = req.body.toTranslate;
+//      // console.log(searchString);
+//      request(url, function (error, data) {
+//        if (!error && res.statusCode == 200) {
+//          var rawDiceData = data.body;
+//          var jsonDiceData = JSON.parse(rawDiceData);
+//          var diceJobs = jsonDiceData.resultItemList;
+//          for (var i = 0; i < diceJobs.length; i ++) {
+
+//               jobDetail.url = diceJobs[i].detailUrl;
+//               jobDetail.title = diceJobs[i].jobTitle;
+//               jobDetail.location = diceJobs[i].location;
+//               jobDetail.company = diceJobs[i].company;
+//               console.log(jobDetail);
+
+//               request(jobDetail.url, function(error, response, html){
+//                   if(!error){
+//                       var $ = cheerio.load(html);
+
+//                       $('#jobdescSec').filter(function(){
+//                           var data = $(this);
+//                           jobDetail.description = data.text();
+//                       });
+//                   }
+
+//               });
+//          }
+//        }
+//     });
+
+// });
 
 router.post('/indeed', function(req, res, next) {
 
@@ -121,6 +208,7 @@ router.post('/indeed', function(req, res, next) {
       });
 
 });
+
 
 
 // router.post('/trendyskills', function(req, res, next) {

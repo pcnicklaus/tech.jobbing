@@ -10,7 +10,19 @@
   <h2>Update Email</h2>
   <form ng-submit="updateUser(newEmail)">
     <div class="form-group">
-      <input type="email" class="form-control" ng-model="newEmail" required>
+        <input type="email" class="form-control" ng-model="newEmail" required>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" ng-model="newSearchTitle" required>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" ng-model="newSearchDesc" required>
+    </div>
+    <div class="form-group">
+        <input type="state" class="form-control" ng-model="newSearchState" required>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" ng-model="newSearchCity" required>
     </div>
     <button type="submit" class="btn btn-default btn-block">Update</button>
   </form>
