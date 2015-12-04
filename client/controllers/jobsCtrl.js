@@ -1,4 +1,4 @@
-app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal', 'jobDetailService', function ($scope, $auth, $location, $http, $uibModal, jobDetailService) {
+app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal', 'jobDetailService', 'userService', function ($scope, $auth, $location, $http, $uibModal, jobDetailService, userService) {
 
   $scope.craigslistData = [];
 
@@ -6,11 +6,6 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
   // scrape the titles and url 60 off craiglist
   $scope.searchCraigsList = function () {
-    var title =
-
-    var payload = {
-
-    };
 
     $http.post('/scrape')
         .success(function(data) {
