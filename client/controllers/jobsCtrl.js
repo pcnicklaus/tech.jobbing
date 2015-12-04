@@ -78,7 +78,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
       var payload = {};
       $http.post('/dice', payload)
           .success(function (data) {
-              console.log(data.resultItemList);
+              console.log(data);
           })
           .error(function (err) {
               console.log(err, ' error');
