@@ -32,4 +32,5 @@ also needed
 
 ice box
 - watch / cron
--
+- send resume and cover letter
+- alchemy

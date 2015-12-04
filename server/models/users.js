@@ -6,6 +6,7 @@ var config = require('../../_config');
 
 
 var User = new Schema({
+  name: String,
   email: {
     type: String,
     unique: true,
@@ -15,6 +16,11 @@ var User = new Schema({
     type: String,
     select: false
   },
+  searchTitle: String,
+  searchKeyword: String,
+  searchCity: String,
+  searchState: String,
+  myJobs: [],
   githubProfileID: {
     type: String
   },
@@ -23,7 +29,7 @@ var User = new Schema({
   },
   instagramProfileID: {
     type: String
-  }
+  },
 });
 
 

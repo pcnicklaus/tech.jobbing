@@ -6,7 +6,13 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
   // scrape the titles and url 60 off craiglist
   $scope.searchCraigsList = function () {
-    $http.get('/scrape')
+    var title =
+
+    var payload = {
+
+    };
+
+    $http.post('/scrape')
         .success(function(data) {
             scrapedData = data;
             limitCraig();

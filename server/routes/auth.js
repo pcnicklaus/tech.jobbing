@@ -68,10 +68,17 @@ router.post('/signup', function (req, res) {
             });
         }
         var user = new User({
+            name: req.body.firstName,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            searchTitle: req.body.searchTitle,
+            searchKeyword: req.body.searchKeyword,
+            searchCity: req.body.searchCity,
+            searchState: req.body.searchState,
+            myJobs: []
         });
         user.save(function () {
+            console.log()
             var token = createToken(user);
             res.send({
                 token: token,
@@ -122,7 +129,13 @@ router.put('/update', ensureAuthenticated, function (req, res) {
                 }
             });
         }
+        console.log(req.body, 'req body');
         user.email = req.body.email;
+        user.searchTitle = req.body.newSearchTitle;
+        user.searchKeyword = req.body.newSearchKeyword;
+        user.searchCity = req.body.newSearchCity;
+        user.searchState = req.body.newSearchState;
+        console.log(user, 'user');
         user.save(function () {
             res.send(user);
         });

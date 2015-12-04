@@ -1,5 +1,6 @@
 app.controller('profileCtrl', function($scope, $rootScope, $http, $window) {
 
+  console.log($scope.newSearchTitle);
   $scope.email = JSON.parse(localStorage.getItem('currentUser')).email;
   $scope.newEmail = $scope.email;
 
@@ -8,10 +9,15 @@ app.controller('profileCtrl', function($scope, $rootScope, $http, $window) {
     // create payload
     var payload = {};
     payload.email = email;
+    payload.newSearchTitle = $scope.newSearchTitle;
+    payload.newSearchKeyword = $scope.newSearchKeyword;
+    payload.newSearchState = $scope.newSearchState;
+    payload.newSearchCity = $scope.newSearchCity;
     payload._id = JSON.parse(localStorage.getItem('currentUser'))._id;
     if(password) {
       payload.password = password;
     }
+    console.log(payload);
     // send XHR request
     $http.put('/auth/update', payload)
       .success(function (data, status) {
