@@ -1,0 +1,25 @@
+from index.js routes
+
+// router.post('/trendyskills', function(req, res, next) {
+
+//     // publisher id = 2880064796047261
+//     // url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript,node&city=80205&sort=1";
+//     url = "http://trendyskills.com/?q=keywordDate&keyID[]=915&keyID[]=691&dateFrom=2013/02/17&dateTo=2013/02/24&filterAmbiguous=true&showAmbiguous=";
+
+//       console.log(req.body);
+//       // var searchString = req.body.toTranslate;
+//       // console.log(searchString);
+//       request(url, function (error, data) {
+//         if (!error && res.statusCode == 200) {
+//           var indeedData = data.body
+//           console.log(indeedData);
+//           res.send(indeedData);
+//         }
+//       });
+
+// });
+// graphing
+// http://trendyskills.com/?q=keywordDate&keyID[]=915&keyID[]=691&dateFrom=2013/02/17&dateTo=2013/02/24&filterAmbiguous=true&showAmbiguous=
+// http://trendyskills.com/ = trending frameworks
+
+// http://rss.careerjet.co.uk/rss?s=developer%20javascript%20junior&l=Denver&lid=8071&psz=50&snl=100

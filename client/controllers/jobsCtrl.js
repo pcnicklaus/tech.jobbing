@@ -7,14 +7,14 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
   // scrape the titles and url 60 off craiglist
   $scope.searchCraigsList = function () {
 
-    var holder = userService.user.searchTitle;
-    var formattedSearchTitle = holder.replace(' ', '%20');
+    // var holder = userService.user.searchTitle;
+    // var formattedSearchTitle = holder.replace(' ', '%20');
 
-    var payload = {
-      searchCity: userService.user.searchCity,
-      searchTitle: formattedSearchTitle
-    };
-    console.log(payload);
+    // var payload = {
+    //   searchCity: userService.user.searchCity,
+    //   searchTitle: formattedSearchTitle
+    // };
+    // console.log(payload);
 
     $http.post('/scrape', payload)
         .success(function(data) {
