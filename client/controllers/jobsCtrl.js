@@ -1,5 +1,6 @@
 app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal', 'jobDetailService', 'userService', function ($scope, $auth, $location, $http, $uibModal, jobDetailService, userService) {
 
+  console.log(userService.user);
   $scope.craigslistData = [];
 
   var scrapedData = [];

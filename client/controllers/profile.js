@@ -1,6 +1,5 @@
-app.controller('profileCtrl', function($scope, $rootScope, $http, $window) {
+app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', 'userService', function($scope, $rootScope, $http, $window, userService) {
 
-  console.log($scope.newSearchTitle);
   $scope.email = JSON.parse(localStorage.getItem('currentUser')).email;
   $scope.newEmail = $scope.email;
 
@@ -9,10 +8,10 @@ app.controller('profileCtrl', function($scope, $rootScope, $http, $window) {
     // create payload
     var payload = {};
     payload.email = email;
-    payload.newSearchTitle = $scope.newSearchTitle;
-    payload.newSearchKeyword = $scope.newSearchKeyword;
-    payload.newSearchState = $scope.newSearchState;
-    payload.newSearchCity = $scope.newSearchCity;
+    payload.newSearchTitle = userService.user.searchTitle = $scope.newSearchTitle;
+    payload.newSearchKeyword = userService.user.searchKeyword = $scope.newSearchKeyword;
+    payload.newSearchState = userService.user.searchState = $scope.newSearchState;
+    payload.newSearchCity = userService.user.searchCity = $scope.newSearchCity;
     payload._id = JSON.parse(localStorage.getItem('currentUser'))._id;
     if(password) {
       payload.password = password;
@@ -37,4 +36,4 @@ app.controller('profileCtrl', function($scope, $rootScope, $http, $window) {
       });
   };
 
-});
+}]);

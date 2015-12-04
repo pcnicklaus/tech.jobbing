@@ -1,4 +1,6 @@
-app.controller('loginCtrl', function($scope, $auth, $rootScope, $window, $location) {
+app.controller('loginCtrl', ['$scope', '$auth', '$rootScope', '$window', '$location', 'userService', function($scope, $auth, $rootScope, $window, $location, userService) {
+
+  console.log(userService.user);
 
   $scope.login = function() {
 
@@ -9,7 +11,12 @@ app.controller('loginCtrl', function($scope, $auth, $rootScope, $window, $locati
 
     $auth.login(user)
       .then(function(response) {
-        console.log(response);
+
+        userService.user.searchTitle = response.data.user.searchTitle;
+        userService.user.searchKeyword = response.data.user.searchKeyword;
+        userService.user.searchState = response.data.user.searchState;
+        userService.user.searchCity = response.data.user.searchCity;
+
         $window.localStorage.currentUser = JSON.stringify(response.data.user);
         $rootScope.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         $location.path('/home');
@@ -34,4 +41,4 @@ app.controller('loginCtrl', function($scope, $auth, $rootScope, $window, $locati
 
   };
 
-});
+}]);
