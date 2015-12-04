@@ -8,9 +8,9 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
   $scope.searchCraigsList = function () {
     var title =
 
-    var payload = {
+    // var payload = {
 
-    };
+    // };
 
     $http.post('/scrape')
         .success(function(data) {

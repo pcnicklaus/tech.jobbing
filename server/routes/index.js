@@ -79,13 +79,6 @@ router.post('/glassdoor', function(req, res, next) {
 
     var url = "http://api.glassdoor.com/api/api.htm?t.p=49627&t.k=h7qO3cGBOJ1&userip=127.0.0.1&useragent=&format=json&v=1&action=jobs-stats&city=denver&jt=developer&returnJobTitles=true&q=developer&minRating=3&admLevelRequested=1";
 
-    $http.get(url)
-        .success(function () {
-            console.log(response);
-        })
-        .error(function () {
-            console.log(error);
-        });
 
 });
 
@@ -93,18 +86,49 @@ router.post('/dice', function(req, res, next) {
 
     // url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript,node&city=80205&sort=1";
     url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript&city=Denver,+CO&sort=1";
-
-       console.log(req.body);
+       var diceData;
+       var realDice;
        // var searchString = req.body.toTranslate;
        // console.log(searchString);
        request(url, function (error, data) {
          if (!error && res.statusCode == 200) {
-           var diceData = data.body;
-           console.log(diceData);
-           res.send(diceData);
+           diceData = JSON.parse(data.body);
+           realDice = diceData.resultItemList;
          }
+         formatDiceData(realDice);
+         // console.log( 'real ')
     });
 });
+
+var diceJobDetail = {};
+var diceUrl;
+function formatDiceData(array) {
+    for (var i = 0; i < array.length; i++) {
+        diceJobDetail.title = array[i].jobTitle;
+        diceJobDetail.company = array[i].company;
+        diceJobDetail.location = array[i].location;
+        diceJobDetail.detailUrl = diceUrl = array[i].detailUrl;
+        diceJobDetail.description = getDiceDetail(diceUrl);
+    }
+    console.log(diceJobDetail);
+
+}
+
+function getDiceDetail (url) {
+  request(url, function(error, response, html){
+      if(!error){
+          var $ = cheerio.load(html);
+          var description;
+          $('#jobdescSec').filter(function(){
+              var data = $(this);
+              description = data.text();
+              // console.log(description, 'descript')
+              diceJobDetail.description = description;
+              console.log(description, ' descrip')
+          });
+      }
+  });
+}
 
 router.post('/indeed', function(req, res, next) {
 
