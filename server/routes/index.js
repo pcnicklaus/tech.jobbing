@@ -3,12 +3,18 @@ var express   = require('express');
 var router    = express.Router();
 var cheerio   = require('cheerio');
 var request   = require('request');
+var mongoose  = require('mongoose-q')(require('mongoose'));
+var User      = require('../models/users');
 
-router.get('/scrape', function(req, res, next) {
+
+router.post('/scrape', function(req, res, next) {
     // var newDater = new Dater({
     //   location: req.body.location
     // });
 
+    var searchCity = req.body.searchCity;
+    var searchTitle = req.body.searchTitle;
+    console.log(searchTitle, 'searchTitle')
     url = 'https://denver.craigslist.org/search/jjj?sort=date&query=web%20developer';
 
     request(url, function(error, response, html){

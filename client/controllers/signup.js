@@ -1,4 +1,4 @@
-app.controller('signupCtrl', function($scope, $http, $auth, $location) {
+app.controller('signupCtrl', ['$scope', '$http', '$auth', '$location', 'userService', function($scope, $http, $auth, $location, userService) {
 
   $scope.signup = function() {
 
@@ -13,6 +13,13 @@ app.controller('signupCtrl', function($scope, $http, $auth, $location) {
       myJobs: []
     };
 
+    userService.user.name = user.name;
+    userService.user.searchTitle = user.searchTitle;
+    userService.user.searchKeyword = user.searchKeyword;
+    userService.user.searchState = user.searchState;
+    userService.user.searchCity = user.searchCity;
+    console.log(userService.user);
+
     $auth.signup(user)
       .then(function(response){
         $location.path('/login');
@@ -23,4 +30,4 @@ app.controller('signupCtrl', function($scope, $http, $auth, $location) {
 
   };
 
-});
+}]);
