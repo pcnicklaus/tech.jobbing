@@ -1,5 +1,7 @@
--- make the searches dynamic
--- make the
+xx-- make the searches dynamic
+
+- open next window on get jobs
+- spinny screen while waiting for data...
 
 ui / ux
 - the tinder of job search.
