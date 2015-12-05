@@ -14,7 +14,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
     var payload = {
       city:     userService.user.searchCity,
       keyword:  searchPhrase
-    }
+    };
 
     $http.post('/scrape', payload)
         .success(function(data) {
@@ -31,30 +31,22 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
   $scope.getCraigslistDetail = function () {
     var listingUrls = $scope.craigslistData;
 
-    for (var i = 0; i < listingUrls.length; i++) {
-      var payload = {url: listingUrls[i].url};
-      console.log(payload, 'pay');
-      $http.post('/detail', payload)
-          .success(function (data) {
-              jobDetailService.craigslist.push(data);
-              console.log(jobDetailService.craigslist, ' craig')
+      if(listingUrls) {
+          for (var i = 0; i < listingUrls.length; i++) {
+            var payload = {url: listingUrls[i].url};
+            $http.post('/detail', payload)
+                .success(function (data) {
+                    jobDetailService.craigslist.push(data);
+                    console.log(jobDetailService.craigslist, ' craig detail')
 
-          })
-          .error(function (err) {
-              console.log(err, " error");
-          });
-    }
+                })
+                .error(function (err) {
+                    console.log(err, " error");
+                });
+          }
+      }
   };
 
-  // open the modal for craigslist scrape button
-  $scope.openModal = function () {
-      var modalInstance = $uibModal.open({
-         templateUrl: 'partials/modalTemplate.html',
-         controller: 'modalCtrl',
-         size: 'lg',
-         backdrop: 'static'
-       });
-   };
 
    // grab data from indeed from the backend route
    $scope.getIndeed = function () {
@@ -70,6 +62,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
       $http.post('/indeed', payload)
           .success(function (data) {
               $scope.indeedData = data.results;
+              console.log($scope.indeedData, ' indeed before detail')
           })
           .error(function (err) {
               console.log(err, ' error');
@@ -80,19 +73,21 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
   $scope.getIndeedDetail = function () {
      var listingData = $scope.indeedData;
 
+     if(listingData) {
+       for (var i = 0; i < listingData.length; i++) {
+         var payload = {url: listingData[i].url};
 
-     for (var i = 0; i < listingData.length; i++) {
-       var payload = {url: listingData[i].url};
-
-       $http.post('/indeed-detail', payload)
-           .success(function (data) {
-               jobDetailService.indeed.push(data);
-               console.log(jobDetailService.indeed, ' indeed ');
-           })
-           .error(function (err) {
-               console.log(err, " error");
-           });
-        }
+         $http.post('/indeed-detail', payload)
+             .success(function (data) {
+                 jobDetailService.indeed.push(data);
+                 console.log(jobDetailService.indeed, ' indeed detail');
+                 formatIndeed();
+             })
+             .error(function (err) {
+                 console.log(err, " error");
+             });
+          }
+      }
    };
 
 
@@ -109,7 +104,8 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
       $http.post('/dice', payload)
           .success(function (data) {
-              $scope.diceData = data.resultItemList;
+              $scope.diceData = jobDetailService.dice.before = data.resultItemList;
+              console.log(jobDetailService.dice.before, " JDS dice before detail");
           })
           .error(function (err) {
               console.log(err, ' error');
@@ -119,37 +115,42 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
   $scope.getDiceDetail = function () {
     var listingData = $scope.diceData;
 
-    for (var i = 0; i < listingData.length; i++) {
-      var payload = {url: listingData[i].detailUrl};
+      if(listingData) {
+          for (var i = 0; i < listingData.length; i++) {
+            var payload = {url: listingData[i].detailUrl};
 
-      $http.post('/dice-detail', payload)
-          .success(function (data) {
-              jobDetailService.dice.push(data);
-              console.log(jobDetailService.dice, ' dice');
+            $http.post('/dice-detail', payload)
+                .success(function (data) {
+                    jobDetailService.dice.push(data);
+                    console.log(jobDetailService.dice, ' dice detail');
+                    formatDice();
+                })
+                .error(function (err) {
+                    console.log(err, " error");
+                });
 
-          })
-          .error(function (err) {
-              console.log(err, " error");
-          });
+        }
+
     }
   };
 
-   // $scope.getDice = function () {
-   //    var payload = {};
-   //    $http.post('/dice', payload)
-   //        .success(function (data) {
-   //            console.log(data.resultItemList);
-   //        })
-   //        .error(function (err) {
-   //            console.log(err, ' error');
-   //        });
-   // };
+
+   // open the modal for craigslist scrape button
+   $scope.openModal = function () {
+       var modalInstance = $uibModal.open({
+          templateUrl: 'partials/modalTemplate.html',
+          controller: 'modalCtrl',
+          size: 'lg',
+          backdrop: 'static'
+        });
+    };
+
 
 
    // helper function to remove the "found more jobs near denver" links...
    var rawCraigData = [];
    var limitCraig = function () {
-       for (var i = 0; i < 60; i ++) {
+       for (var i = 0; i < 50; i ++) {
            rawCraigData.push(scrapedData[i]);
        }
        formatCraig();
@@ -157,7 +158,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
    // helper function that takes title and url frag & pushes them into array as a mapped object
    var formatCraig = function () {
-       for (var i = 0; i < 60; i ++) {
+       for (var i = 0; i < 50; i ++) {
            // total length of each string. url is always 18 characters, soo...
            var title = rawCraigData[i].slice(0, (rawCraigData[i].length - 20));
            var urlFrag = rawCraigData[i].slice((rawCraigData[i].length - 20), rawCraigData[i].length);
@@ -165,7 +166,57 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
                title: title,
                url: 'https://denver.craigslist.org' + urlFrag
            });
+           console.log($scope.craigslistData, ' cldata before detail');
+
        }
+       // not sure if this will work.
    };
+
+  // helper function that adds the descrip from dice detail into JDS.dice.Formatted array.
+  var formatDice = function () {
+    console.log('firing');
+      var diceDetail = jobDetailService.dice;
+      var dicePre = jobDetailService.dice.before;
+      var holder = [];
+
+      for (var i = 0; i < diceDetail.length; i ++) {
+          var jobDetail = {};
+          jobDetail.title = dicePre[i].jobTitle;
+          jobDetail.description = diceDetail[i].description;
+          jobDetail.compensation = '';
+          jobDetail.url = dicePre[i].detailUrl;
+          holder.push(jobDetail);
+          console.log('holder', holder)
+
+          console.log('obDetailService.dice.formatted',           jobDetailService.dice.formatted)
+
+      }
+      jobDetailService.dice.formatted = holder;
+      // console.log(jobDetailService.dice.formatted, 'dice formatted');
+  };
+
+
+  // helper function that adds the descrip from dice detail into JDS.dice.Formatted array.
+  var formatIndeed = function () {
+    console.log('firing');
+      var indeedDetail = jobDetailService.indeed;
+      var indeedPre = $scope.indeedData;
+      var holder = [];
+
+      for (var i = 0; i < indeedDetail.length; i ++) {
+          var jobDetail = {};
+          jobDetail.title = indeedPre[i].jobtitle;
+          jobDetail.description = indeedDetail[i].description;
+          jobDetail.compensation = '';
+          jobDetail.url = indeedPre[i].url;
+          holder.push(jobDetail);
+          console.log('holder', holder)
+
+          console.log('obDetailService.indeed.formatted',           jobDetailService.indeed.formatted)
+
+      }
+      jobDetailService.indeed.formatted = holder;
+      // console.log(jobDetailService.dice.formatted, 'dice formatted');
+  };
 
 }]);
