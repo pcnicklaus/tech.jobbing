@@ -7,7 +7,8 @@ app.service('jobDetailService', function () {
 
   return {
     craigslist: this.craigslist,
-    dice: this.dice
+    dice: this.dice,
+    indeed: this.indeed
   };
 
 });
