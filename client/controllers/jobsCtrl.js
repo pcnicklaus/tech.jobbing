@@ -186,19 +186,13 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
           jobDetail.compensation = '';
           jobDetail.url = dicePre[i].detailUrl;
           holder.push(jobDetail);
-          console.log('holder', holder)
-
-          console.log('obDetailService.dice.formatted',           jobDetailService.dice.formatted)
-
       }
       jobDetailService.dice.formatted = holder;
-      // console.log(jobDetailService.dice.formatted, 'dice formatted');
   };
 
 
   // helper function that adds the descrip from dice detail into JDS.dice.Formatted array.
   var formatIndeed = function () {
-    console.log('firing');
       var indeedDetail = jobDetailService.indeed;
       var indeedPre = $scope.indeedData;
       var holder = [];
@@ -210,13 +204,8 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
           jobDetail.compensation = '';
           jobDetail.url = indeedPre[i].url;
           holder.push(jobDetail);
-          console.log('holder', holder)
-
-          console.log('obDetailService.indeed.formatted',           jobDetailService.indeed.formatted)
-
       }
       jobDetailService.indeed.formatted = holder;
-      // console.log(jobDetailService.dice.formatted, 'dice formatted');
   };
 
 }]);
