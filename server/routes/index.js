@@ -4,20 +4,21 @@ var router    = express.Router();
 var cheerio   = require('cheerio');
 var request   = require('request');
 
-router.get('/scrape', function(req, res, next) {
+router.post('/scrape', function(req, res, next) {
     // var newDater = new Dater({
     //   location: req.body.location
     // });
+    console.log('here')
       var city = req.body.city;
-      var title = req.body.title;
+      var keyword = req.body.keyword;
 
-
-    url = 'https://'+ city + '.craigslist.org/search/jjj?sort=date&query=web%20developer';
-
+    console.log(req.body);
+    url = 'https://'+ city + '.craigslist.org/search/jjj?sort=date&query=' + keyword;
+    console.log(url);
     request(url, function(error, response, html){
         if(!error){
             var $ = cheerio.load(html);
-
+            console.log('here 2');
             var title;
             var link;
             var holder;
@@ -91,19 +92,66 @@ router.post('/glassdoor', function(req, res, next) {
 
 router.post('/dice', function(req, res, next) {
 
-    // url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript,node&city=80205&sort=1";
-    url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript&city=Denver,+CO&sort=1";
+    var city = req.body.cityState;
+    var keyword = req.body.keyword;
 
-       console.log(req.body);
-       // var searchString = req.body.toTranslate;
-       // console.log(searchString);
-       request(url, function (error, data) {
-         if (!error && res.statusCode == 200) {
-           var diceData = data.body;
-           console.log(diceData);
-           res.send(diceData);
-         }
-    });
+    url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=" + keyword + "&city=" + city + "sort=1";
+
+       console.log(req.body, url);
+
+         request(url, function (error, data) {
+           if (!error && res.statusCode == 200) {
+             var diceData = data.body;
+             console.log(diceData);
+             res.send(diceData);
+           }
+      });
+});
+
+router.post('/dice-detail', function (req, res, next) {
+
+  url = req.body.url;
+  location = req.body.location;
+
+  request(url, function(error, response, html){
+      if(!error){
+          var $ = cheerio.load(html);
+
+          var jobDetail = {
+                  title: '',
+                  description: '',
+                  compensation: '',
+                  company: '',
+                  location: location,
+                  url: url
+              };
+
+          $('#jt').filter(function(){
+              var data = $(this);
+              jobDetail.title = data.text();
+          });
+
+          $('#jobdescSec').filter(function () {
+              var data = $(this);
+              jobDetail.description = data.text();
+          });
+
+          $('.ml20').filter(function () {
+              var data = $(this);
+              // this is actually compensation and telecommuting type thing...
+              jobDetail.compensation = data.text();
+          });
+
+          // $('p.attrgroup').filter(function() {
+          //     var data = $(this);
+          //     jobDetail.compensation = data.children().first().text();
+          // });
+          // res.send(jobs);
+      }
+      console.log(jobDetail);
+      res.send(jobDetail);
+  });
+
 });
 
 router.post('/indeed', function(req, res, next) {

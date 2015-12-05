@@ -6,9 +6,17 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
   var scrapedData = [];
 
   // scrape the titles and url 60 off craiglist
-  $scope.searchCraigsList = function () {
+  $scope.getCraigslist = function () {
 
-    $http.post('/scrape')
+    var holder = userService.user.searchKeyword;
+    var searchPhrase = holder.replace(' ', '%20');
+
+    var payload = {
+      city:     userService.user.searchCity,
+      keyword:  searchPhrase
+    }
+
+    $http.post('/scrape', payload)
         .success(function(data) {
             scrapedData = data;
             limitCraig();
@@ -18,39 +26,23 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
         });
   };
 
-  // helper function to remove the "found more jobs near denver" links...
-  var rawCraigData = [];
-  var limitCraig = function () {
-      for (var i = 0; i < 60; i ++) {
-          rawCraigData.push(scrapedData[i]);
-      }
-      formatCraig();
-  };
-
-  // helper function that takes title and url frag & pushes them into array as a mapped object
-  var formatCraig = function () {
-      for (var i = 0; i < 60; i ++) {
-          // total length of each string. url is always 18 characters, soo...
-          var title = rawCraigData[i].slice(0, (rawCraigData[i].length - 20));
-          var urlFrag = rawCraigData[i].slice((rawCraigData[i].length - 20), rawCraigData[i].length);
-          $scope.craigslistData.push({
-              title: title,
-              url: 'https://denver.craigslist.org' + urlFrag
-          });
-      }
-  };
 
   // craiglist job detail scrape
-  $scope.searchDetail = function () {
-      var payload = {url: this.job.url};
+  $scope.getCraigslistDetail = function () {
+    var listingUrls = $scope.craigslistData;
+
+    for (var i = 0; i < listingUrls.length; i++) {
+      var payload = {url: listingUrls[i].url};
+      console.log(payload, 'pay');
       $http.post('/detail', payload)
           .success(function (data) {
-              jobDetailService.jobDetail = data;
-              console.log(jobDetailService.jobDetail, 'service');
+              jobDetailService.craigsList.push(data);
+
           })
           .error(function (err) {
               console.log(err, " error");
           });
+    }
   };
 
   // open the modal for craigslist scrape button
@@ -77,15 +69,43 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
 
    $scope.getDice = function () {
-      var payload = {};
+
+      var cityState = userService.user.searchCity + ",+" + userService.user.searchState + "&";
+
+      var keyword = userService.user.searchKeyword.replace(' ', ('%20'));
+
+      var payload = {
+        cityState: cityState,
+        keyword: keyword
+      };
+
+      console.log(payload);
       $http.post('/dice', payload)
           .success(function (data) {
-              console.log(data.resultItemList);
+              $scope.diceData = data.resultItemList;
           })
           .error(function (err) {
               console.log(err, ' error');
           });
    };
+
+  $scope.getDiceDetail = function () {
+    var listingData = $scope.diceData;
+
+    for (var i = 0; i < listingData.length; i++) {
+      var payload = {url: listingData[i].detailUrl, location: listingData[i].location};
+      console.log(payload, 'pay');
+      $http.post('/dice-detail', payload)
+          .success(function (data) {
+              jobDetailService.dice.push(data);
+              console.log(jobDetailService.dice);
+
+          })
+          .error(function (err) {
+              console.log(err, " error");
+          });
+    }
+  };
 
    // $scope.getDice = function () {
    //    var payload = {};
@@ -97,5 +117,29 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
    //            console.log(err, ' error');
    //        });
    // };
+
+
+   // helper function to remove the "found more jobs near denver" links...
+   var rawCraigData = [];
+   var limitCraig = function () {
+       for (var i = 0; i < 60; i ++) {
+           rawCraigData.push(scrapedData[i]);
+       }
+       formatCraig();
+   };
+
+   // helper function that takes title and url frag & pushes them into array as a mapped object
+   var formatCraig = function () {
+       for (var i = 0; i < 60; i ++) {
+           // total length of each string. url is always 18 characters, soo...
+           var title = rawCraigData[i].slice(0, (rawCraigData[i].length - 20));
+           var urlFrag = rawCraigData[i].slice((rawCraigData[i].length - 20), rawCraigData[i].length);
+           $scope.craigslistData.push({
+               title: title,
+               url: 'https://denver.craigslist.org' + urlFrag
+           });
+           console.log($scope.craigslistData, 'cldata');
+       }
+   };
 
 }]);
