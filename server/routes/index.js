@@ -156,23 +156,50 @@ router.post('/dice-detail', function (req, res, next) {
 
 router.post('/indeed', function(req, res, next) {
 
-    // publisher id = 2880064796047261
-    // url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript,node&city=80205&sort=1";
-    url = "http://api.indeed.com/ads/apisearch?publisher=2880064796047261&format=json&q=javascript&l=denver%2C+co&sort=date&radius=&st=employer&jt=fulltime&start=&limit=30&fromage=10&filter=&latlong=1&co=us&chnl=&userip=127.0.0.1&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
+    var keyword = req.body.keyword;
+    var city    = req.body.city;
+    var state   = req.body.state;
 
-      console.log(req.body);
-      // var searchString = req.body.toTranslate;
-      // console.log(searchString);
-      request(url, function (error, data) {
+
+    url = "http://api.indeed.com/ads/apisearch?publisher=2880064796047261&format=json&q=" + keyword + "&l=" + city + "%2C+" + state + "&sort=date&radius=&st=employer&jt=fulltime&start=&limit=30&fromage=10&filter=&latlong=1&co=us&chnl=&userip=127.0.0.1&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
+
+    console.log(req.body);
+    console.log(url);
+
+    request(url, function (error, data) {
         if (!error && res.statusCode == 200) {
           var indeedData = data.body
           console.log(indeedData);
           res.send(indeedData);
         }
-      });
+    });
 
 });
 
+router.post('/indeed-detail', function (req, res, next) {
+
+  url = req.body.url;
+
+  request(url, function(error, response, html){
+      if(!error){
+          var $ = cheerio.load(html);
+
+          var jobDetail = {
+                  description: '',
+                  url: url
+              };
+
+          $('#job_summary').filter(function () {
+              var data = $(this);
+              jobDetail.description = data.text();
+          });
+
+      }
+      console.log(jobDetail, ' job detail');
+      res.send(jobDetail);
+  });
+
+});
 
 // router.post('/trendyskills', function(req, res, next) {
 

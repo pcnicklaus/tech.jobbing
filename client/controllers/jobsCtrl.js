@@ -36,7 +36,8 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
       console.log(payload, 'pay');
       $http.post('/detail', payload)
           .success(function (data) {
-              jobDetailService.craigsList.push(data);
+              jobDetailService.craigslist.push(data);
+              console.log(jobDetailService.craigslist, ' craig')
 
           })
           .error(function (err) {
@@ -57,14 +58,41 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
    // grab data from indeed from the backend route
    $scope.getIndeed = function () {
-      var payload = {};
+      var keyword = userService.user.searchKeyword.replace(' ', '%20');
+      var state   = userService.user.searchState.trim();
+      var city    = userService.user.searchCity.trim();
+      var payload = {
+        keyword: keyword,
+        city: city,
+        state: state
+      };
+
       $http.post('/indeed', payload)
           .success(function (data) {
-              console.log(data.results);
+              $scope.indeedData = data.results;
           })
           .error(function (err) {
               console.log(err, ' error');
           });
+   };
+
+
+  $scope.getIndeedDetail = function () {
+     var listingData = $scope.indeedData;
+
+
+     for (var i = 0; i < listingData.length; i++) {
+       var payload = {url: listingData[i].url};
+
+       $http.post('/indeed-detail', payload)
+           .success(function (data) {
+               jobDetailService.indeed.push(data);
+               console.log(jobDetailService.indeed, ' indeed ');
+           })
+           .error(function (err) {
+               console.log(err, " error");
+           });
+        }
    };
 
 
@@ -79,7 +107,6 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
         keyword: keyword
       };
 
-      console.log(payload);
       $http.post('/dice', payload)
           .success(function (data) {
               $scope.diceData = data.resultItemList;
@@ -93,12 +120,12 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
     var listingData = $scope.diceData;
 
     for (var i = 0; i < listingData.length; i++) {
-      var payload = {url: listingData[i].detailUrl, location: listingData[i].location};
-      console.log(payload, 'pay');
+      var payload = {url: listingData[i].detailUrl};
+
       $http.post('/dice-detail', payload)
           .success(function (data) {
               jobDetailService.dice.push(data);
-              console.log(jobDetailService.dice);
+              console.log(jobDetailService.dice, ' dice');
 
           })
           .error(function (err) {
@@ -138,7 +165,6 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
                title: title,
                url: 'https://denver.craigslist.org' + urlFrag
            });
-           console.log($scope.craigslistData, 'cldata');
        }
    };
 
