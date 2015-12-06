@@ -14,7 +14,8 @@ app.controller('detailCtrl', ['$scope', '$rootScope', '$http', '$window', 'userS
 
   $scope.add = function () {
     $scope.jobsToSave.push(this.job);
-    console.log(this.job, 'jobs to save')
+    jobDetailService.myJobs = $scope.jobsToSave;
+    console.log(jobDetailService.myJobs, 'my jobs save')
     console.log($scope.jobsToSave, 'scope to save');
   };
 

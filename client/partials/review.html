@@ -1,0 +1,24 @@
+<div layout-fill>
+  <div layout="row" flex>
+    <div flex="50" layout="column" flex>
+
+      <md-card ng-repeat="job in myJobs">
+        <img ng-src="https://s-media-cache-ak0.pinimg.com/736x/eb/a7/13/eba713577fedf27587fd29577222c8fe.jpg" class="md-card-image" alt="Washed Out">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{job.title}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            {{job.description}}
+            - {{job.url}}
+          </p>
+        </md-card-content>
+        <md-card-actions layout="column" layout-align="start">
+          <md-button ng-click="remove(index)">Nah</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+
+</div>

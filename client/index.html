@@ -6,8 +6,7 @@
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
     <link rel="stylesheet" href="css/main.css" type="text/css">
-    <script src="../bower_components/angular/angular.js"></script>
-    <script src="../bower_components/angular-swing/dist/angular-swing.js"></script>
+
 
     <style>
         body {
@@ -43,6 +42,7 @@
                         <li ng-if="isAuthenticated()"><a href="#/profile">Profile</a></li>
                         <li ng-if="isAuthenticated()"><a href="#/search">Search</a></li>
                         <li ng-if="isAuthenticated()"><a href="#/jobs">Jobs</a></li>
+                        <li ng-if="isAuthenticated()"><a href="#/review">Review</a></li>
                         <li ng-if="isAuthenticated()"><a ng-click="logout()" href="">Logout</a></li>
 
                     </ul>
@@ -84,6 +84,7 @@
     <script type="text/javascript" src="controllers/modalCtrl.js"></script>
     <script type="text/javascript" src="controllers/searchCtrl.js"></script>
     <script type="text/javascript" src="controllers/detailCtrl.js"></script>
+    <script type="text/javascript" src="controllers/reviewCtrl.js"></script>
     <script type="text/javascript" src="services/jobDetailService.js"></script>
     <script type="text/javascript" src="services/userService.js"></script>
     <script type="text/javascript" src="services/craigslistService.js"></script>

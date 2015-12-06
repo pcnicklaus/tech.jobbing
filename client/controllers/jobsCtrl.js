@@ -87,7 +87,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
          $http.post('/indeed-detail', payload)
              .success(function (data) {
                  jobDetailService.indeed.push(data);
-                 console.log(jobDetailService.indeed, ' indeed detail');
+                 console.log(jobDetailService.indeed, ' indeed after detail');
                  formatIndeed();
 
              })
