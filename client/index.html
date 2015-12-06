@@ -37,10 +37,11 @@
                     <ul class="nav navbar-nav">
                         <li ng-if="!isAuthenticated()"><a href="#/login">Login</a></li>
                         <li ng-if="!isAuthenticated()"><a href="#/signup">Signup</a></li>
-                        <li ng-if="isAuthenticated()"><a ng-click="logout()" href="">Logout</a></li>
                         <li ng-if="isAuthenticated()"><a href="#/profile">Profile</a></li>
-                        <li><a href="#/jobs">Jobs</a></li>
-                        <li><a href="#/navigation">Navigation</a></li>
+                        <li ng-if="isAuthenticated()"><a href="#/search">Search</a></li>
+                        <li ng-if="isAuthenticated()"><a href="#/jobs">Jobs</a></li>
+                        <li ng-if="isAuthenticated()"><a ng-click="logout()" href="">Logout</a></li>
+
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -68,6 +69,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
 
+    <script src="../bower_components/angular-material/angular-material.js"></script>
+
+
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/satellizer/0.12.5/satellizer.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
@@ -77,6 +81,7 @@
     <script type="text/javascript" src="controllers/profile.js"></script>
     <script type="text/javascript" src="controllers/jobsCtrl.js"></script>
     <script type="text/javascript" src="controllers/modalCtrl.js"></script>
+    <script type="text/javascript" src="controllers/searchCtrl.js"></script>
     <script type="text/javascript" src="services/jobDetailService.js"></script>
     <script type="text/javascript" src="services/userService.js"></script>
     <script type="text/javascript" src="services/craigslistService.js"></script>

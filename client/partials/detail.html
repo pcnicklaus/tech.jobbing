@@ -4,6 +4,13 @@
       <form method="post" ng-submit="login()" name="loginForm" novalidate>
         <div class="panel-body">
           <h2 class="text-center">Detail</h2>
+         <!--  <card></card> -->
+         <div ng-repeat="card in indeed.formatted track by $index">
+          hi
+            <h1>{{card.title}}</h1>
+            <p>{{card.description}}</p>
+            <p>{{card.url}}</p>
+         </div>
         </div>
       </form>
     </div>

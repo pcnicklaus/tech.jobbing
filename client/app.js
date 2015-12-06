@@ -1,4 +1,4 @@
-var app = angular.module('MyApp', ['ngRoute', 'satellizer', 'ui.bootstrap']);
+var app = angular.module('MyApp', ['ngRoute', 'satellizer', 'ui.bootstrap', 'ngMaterial']);
 
 app.config(function ($routeProvider, $authProvider, $locationProvider) {
 
@@ -75,6 +75,10 @@ app.config(function ($routeProvider, $authProvider, $locationProvider) {
         .when('/jobs', {
             templateUrl: 'partials/jobs.html',
             controller: 'jobsCtrl'
+        })
+        .when('/search', {
+            templateUrl: 'partials/search.html',
+            controller: 'searchCtrl'
         })
 
         .when('/jobDetail', {

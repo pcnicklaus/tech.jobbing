@@ -1,36 +1,23 @@
 <div class="container">
-    <div class="row">
-        <!-- <div class="col-xs-12">
-            <div class="input-group col-xs-8 col-xs-offset-2">
-                <input type="text" class="form-control" placeholder="where do you wanna work?"  ng-model="job.city">
-            </div>
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
 
-            <div class="input-group col-xs-8 col-xs-offset-2">
-                <input type="text" class="form-control" placeholder="what do you wanna do?"  ng-model="job.title">
-            </div>
-
-            <div class="input-group col-xs-8 col-xs-offset-2">
-                <input type="text" class="form-control" ng-model="job.keywords" placeholder="anything special we should be on the lookout for?">
-            </div>
-
-            <div class="input-group col-xs-4 col-xs-offset-4">
-              <button class="btn btn-md btn-default" ng-click="searchCraigsList()">Get 'em rover</button>
-            </div>
-        </div> -->
+      <h3>Currently, we got...</h3>
+      <div>
+        <button class="btn btn-block btn-default" ng-click="getCraigslistDetail()">Craigslist</button>
+      </div>
+      <div>
+        <button class="btn btn-block btn-default" ng-click="getIndeedDetail()">Indeed</button>
+      </div>
+      <div>
+        <button class="btn btn-block btn-default" ng-click="getDiceDetail()">Dice</button>
+      </div>
+      <br>
+      <div>
+        <button class="btn btn-block btn-default" ng-click=""><a href="#/detail">Let's see 'em</a></button>
+      </div>
     </div>
-    <div>
-      <button class="btn btn-md btn-default" ng-click="getCraigslist()">Craigslist</button>
-    </div>
-    <div>
-      <button class="btn btn-md btn-default" ng-click="getIndeed()">Indeed</button>
-    </div>
-    <div>
-      <button class="btn btn-md btn-default" ng-click="getDice()">Dice</button>
-    </div>
-
-    <div>
-      <button class="btn btn-md btn-default" ng-click="getIndeedDetail(); getDiceDetail(); getCraigslistDetail()"><a href="#/detail">Let's see 'em</a></button>
-    </div>
+  </div>
 </div>
 
 

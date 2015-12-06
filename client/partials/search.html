@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <div>
+        <h2>Search Details</h2>
+        <form ng-submit="updateSearch()">
+
+          <div class="form-group">
+              <input type="text" class="form-control" ng-model="newSearchTitle" placeholder="Job Title">
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" ng-model="newSearchKeyword" placeholder="Keyword">
+          </div>
+          <div class="form-group">
+              <input type="state" class="form-control" ng-model="newSearchState" placeholder="State">
+          </div>
+          <div class="form-group">
+              <input type="city" class="form-control" ng-model="newSearchCity" placeholder="City">
+          </div>
+          <button class="btn btn-default btn-block"><a href="#/jobs">Update</a></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

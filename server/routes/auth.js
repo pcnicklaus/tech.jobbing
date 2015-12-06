@@ -130,11 +130,11 @@ router.put('/update', ensureAuthenticated, function (req, res) {
             });
         }
         console.log(req.body, 'req body');
-        user.email = req.body.email;
-        user.searchTitle = req.body.newSearchTitle;
-        user.searchKeyword = req.body.newSearchKeyword;
-        user.searchCity = req.body.newSearchCity;
-        user.searchState = req.body.newSearchState;
+        user.email = req.body.email || user.email;
+        user.searchTitle = req.body.newSearchTitle || user.searchTitle;
+        user.searchKeyword = req.body.newSearchKeyword || user.searchKeyword;
+        user.searchCity = req.body.newSearchCity || user.searchCity;
+        user.searchState = req.body.newSearchState || user.searchState;
         console.log(user, 'user');
         user.save(function () {
             res.send(user);
