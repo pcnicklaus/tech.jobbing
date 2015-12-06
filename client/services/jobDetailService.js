@@ -9,8 +9,9 @@ app.service('jobDetailService', function () {
   // this is formatted set in formatDice
   // this.dice.formatted
 
-
   this.indeed = [];
+
+  this.myJobs = [];
 
   return {
     craigslist: this.craigslist,
