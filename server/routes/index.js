@@ -4,6 +4,71 @@ var router    = express.Router();
 var cheerio   = require('cheerio');
 var request   = require('request');
 var User      = require('../models/users.js');
+var nodemailer = require('nodemailer');
+
+var config    = require('../../_config.js');
+
+router.post('/mail', function (req, res, next) {
+
+    console.log(req.body)
+    // create reusable transporter object using SMTP transport
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'pcnicklaus@gmail.com',
+            pass: '******'
+        }
+    });
+
+    // NB! No need to recreate the transporter object. You can use
+    // the same transporter object for all e-mails
+
+    // setup e-mail data with unicode symbols
+    var mailOptions = {
+        from: 'Patrick ✔ <pcnicklaus@gmail.com>', // sender address
+        to: 'pcnicklaus@gmail.com, cullenmichaelyates@hotmail.com', // list of receivers
+        subject: 'Hello ✔', // Subject line
+        text: 'Hello world ✔', // plaintext body
+        html: '<b>' + req.body + ' ✔</b>' // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            return console.log(error);
+        }
+        console.log('Message sent: ' + info.response);
+    });
+
+});
+
+router.post('/analyze', function(req, res){
+  // console.log(req.params, "REQ")
+  var description = req.body.description;
+  // console.log(paragraph, "PARAGRAPH")
+  request({
+    method: 'POST',
+    url: 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords?text='+description+'&'+ config.alchemy +'&outputMode=json&sentiment=1&showSourceText=1'
+  }, function(err, response){
+    if(err){
+      console.log('err', err);
+      res.json(err);
+    } else {
+
+      var result = JSON.parse(response.body).keywords;
+      // console.log(response.body);
+      // console.log(response.body.status, "STATUS");
+      console.log(result, "RESULT");
+      res.json(result);
+      // res.render('index', {keywords: result[0].text});
+      // res.send(result);
+
+    }
+  });
+});
+
+
+
 
 
 router.post('/scrape', function(req, res, next) {

@@ -1,3 +1,4 @@
+<md-button ng-click="sendEmail(index)">send your self those jobs huh???</md-button>
 <div layout-fill>
   <div layout="row" flex>
     <div flex="50" layout="column" flex>
@@ -15,8 +16,18 @@
             - {{job.url}}
           </p>
         </md-card-content>
+
+        <md-card-content ng-show="alchemyData" ng-repeat="data in alchemyData">
+          <ul>
+            <li>keyword: {{data.text}} - relevance: {{data.relevance}} - type: {{data.sentiment.type}} - score: {{data.sentiment.score}}
+          </ul>
+
+        </md-card-content>
+
         <md-card-actions layout="column" layout-align="start">
+
           <md-button ng-click="remove(index)">Nah</md-button>
+          <md-button ng-click="analyze()">Analyse it for me</md-button>
         </md-card-actions>
       </md-card>
     </div>
