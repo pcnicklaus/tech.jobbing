@@ -79,6 +79,10 @@ app.config(function ($routeProvider, $authProvider, $locationProvider) {
 
         .when('/jobDetail', {
             templateUrl: 'partials/modalTemplate.html'
+        })
+
+        .when('/detail', {
+            templateUrl: 'partials/detail.html'
         });
 
         // .otherwise('/');
