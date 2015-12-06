@@ -5,6 +5,9 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
   console.log(userService.user);
   $scope.craigslistData = [];
 
+  $scope.changeView = function(view){
+      $location.path(view); // path not hash
+  };
 
   var scrapedData = [];
 
@@ -65,7 +68,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
       $http.post('/indeed', payload)
           .success(function (data) {
               $scope.indeedData = data.results;
-              // console.log($scope.indeedData, ' indeed before detail')
+              console.log($scope.indeedData, ' indeed before detail')
           })
           .error(function (err) {
               console.log(err, ' error');
@@ -75,6 +78,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
   $scope.getIndeedDetail = function () {
      var listingData = $scope.indeedData;
+     console.log('firing')
 
      if(listingData) {
        for (var i = 0; i < listingData.length; i++) {
@@ -83,7 +87,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
          $http.post('/indeed-detail', payload)
              .success(function (data) {
                  jobDetailService.indeed.push(data);
-                 // console.log(jobDetailService.indeed, ' indeed detail');
+                 console.log(jobDetailService.indeed, ' indeed detail');
                  formatIndeed();
 
              })
@@ -139,6 +143,19 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
   };
 
 
+   // $scope.formatAllJobs = function () {
+   //    var indeed = jobDetailService.indeed.formatted;
+   //    var craigs = jobDetailService.craigslist;
+   //    var dice   = jobDetailService.dice.formatted;
+   //    var total  = indeed.length + craigs.length + dice.length;
+   //    var jobs   = [];
+
+
+   //    console.log('indeed :', indeed, 'craigs: ', craigs, 'dice: ', dice, ' total ! ', total);
+
+   // };
+
+
    // open the modal for craigslist scrape button
    $scope.openModal = function () {
        var modalInstance = $uibModal.open({
@@ -148,8 +165,6 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
           backdrop: 'static'
         });
     };
-
-
 
    // helper function to remove the "found more jobs near denver" links...
    var rawCraigData = [];
@@ -193,8 +208,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
       jobDetailService.dice.formatted = holder;
   };
 
-  $scope.indeedFormatted = [];
-  console.log($scope.indeedFormatted, 'indeed formatted')
+  // console.log($scope.indeedFormatted, 'indeed formatted')
   // helper function that adds the descrip from dice detail into JDS.dice.Formatted array.
   var formatIndeed = function () {
       var indeedDetail = jobDetailService.indeed;
@@ -210,7 +224,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
           holder.push(jobDetail);
       }
       jobDetailService.indeed.formatted = $scope.indeedFormatted = holder;
-      console.log($scope.indeedFormatted, ' indeedfrmted in format fn')
+      console.log($scope.indeedFormatted, ' $scope.indeedFormatted');
   };
 
 

@@ -5,6 +5,9 @@
     <title>MEAN Token Auth</title>
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-swing/dist/angular-swing.js"></script>
 
     <style>
         body {
@@ -55,9 +58,7 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-sm-4 text-center">
                 <div ng-view></div>
-            </div>
         </div>
         <!-- /.row -->
 
@@ -82,6 +83,7 @@
     <script type="text/javascript" src="controllers/jobsCtrl.js"></script>
     <script type="text/javascript" src="controllers/modalCtrl.js"></script>
     <script type="text/javascript" src="controllers/searchCtrl.js"></script>
+    <script type="text/javascript" src="controllers/detailCtrl.js"></script>
     <script type="text/javascript" src="services/jobDetailService.js"></script>
     <script type="text/javascript" src="services/userService.js"></script>
     <script type="text/javascript" src="services/craigslistService.js"></script>

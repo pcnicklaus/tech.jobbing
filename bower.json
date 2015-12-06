@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "angular-http-loader": "~0.1.4",
-    "angular-material": "~0.11.4"
+    "angular-material": "~0.11.4",
+    "angular-swing": "*"
   }
 }

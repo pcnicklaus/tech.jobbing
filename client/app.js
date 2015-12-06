@@ -1,4 +1,4 @@
-var app = angular.module('MyApp', ['ngRoute', 'satellizer', 'ui.bootstrap', 'ngMaterial']);
+var app = angular.module('MyApp', ['ngRoute', 'satellizer', 'ui.bootstrap', 'ngMaterial', 'gajus.swing']);
 
 app.config(function ($routeProvider, $authProvider, $locationProvider) {
 
@@ -86,7 +86,8 @@ app.config(function ($routeProvider, $authProvider, $locationProvider) {
         })
 
         .when('/detail', {
-            templateUrl: 'partials/detail.html'
+            templateUrl: 'partials/detail.html',
+            controller: 'detailCtrl'
         });
 
         // .otherwise('/');

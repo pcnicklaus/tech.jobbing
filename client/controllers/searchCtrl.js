@@ -39,4 +39,10 @@ $scope.email = JSON.parse(localStorage.getItem('currentUser')).email;
       });
   };
 
+  $scope.changeView = function(view){
+      $location.path(view); // path not hash
+  };
+
+
+
 }]);

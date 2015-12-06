@@ -3,7 +3,7 @@
     <div class="col-xs-10 col-xs-offset-1">
       <div>
         <h2>Search Details</h2>
-        <form ng-submit="updateSearch()">
+        <form>
 
           <div class="form-group">
               <input type="text" class="form-control" ng-model="newSearchTitle" placeholder="Job Title">
@@ -17,7 +17,7 @@
           <div class="form-group">
               <input type="city" class="form-control" ng-model="newSearchCity" placeholder="City">
           </div>
-          <button class="btn btn-default btn-block"><a href="#/jobs">Update</a></button>
+          <button class="btn btn-default btn-block" ng-click="updateSearch(); formatAllData(); changeView('jobs')">Update</button>
         </form>
       </div>
     </div>
