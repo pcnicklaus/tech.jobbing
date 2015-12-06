@@ -3,6 +3,8 @@ var express   = require('express');
 var router    = express.Router();
 var cheerio   = require('cheerio');
 var request   = require('request');
+var User      = require('../models/users.js');
+
 
 router.post('/scrape', function(req, res, next) {
     // var newDater = new Dater({
@@ -200,6 +202,20 @@ router.post('/indeed-detail', function (req, res, next) {
   });
 
 });
+
+// router.put('/:id', function (req, res, next) {
+//   var update = req.body;
+//   Dater.findByIdAndUpdateQ(req.params.id, update)
+//     .then(function (result) {
+//       // console.log(result);
+//       res.json(result);
+//     })
+//     .catch(function (err) {
+//       // console.log(result);
+//       res.json(result);
+//     })
+//     .done();
+// });
 
 // router.post('/trendyskills', function(req, res, next) {
 

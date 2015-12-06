@@ -1,4 +1,4 @@
-var app = angular.module('MyApp', ['ngRoute', 'satellizer', 'ui.bootstrap']);
+var app = angular.module('MyApp', ['ngRoute', 'satellizer', 'ui.bootstrap', 'ngMaterial', 'gajus.swing']);
 
 app.config(function ($routeProvider, $authProvider, $locationProvider) {
 
@@ -76,13 +76,18 @@ app.config(function ($routeProvider, $authProvider, $locationProvider) {
             templateUrl: 'partials/jobs.html',
             controller: 'jobsCtrl'
         })
+        .when('/search', {
+            templateUrl: 'partials/search.html',
+            controller: 'searchCtrl'
+        })
 
         .when('/jobDetail', {
             templateUrl: 'partials/modalTemplate.html'
         })
 
         .when('/detail', {
-            templateUrl: 'partials/detail.html'
+            templateUrl: 'partials/detail.html',
+            controller: 'detailCtrl'
         });
 
         // .otherwise('/');

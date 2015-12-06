@@ -1,7 +1,13 @@
-app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal', 'jobDetailService', 'userService', function ($scope, $auth, $location, $http, $uibModal, jobDetailService, userService) {
+app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal', 'jobDetailService', 'userService', '$window', '$rootScope', function ($scope, $auth, $location, $http, $uibModal, jobDetailService, userService, $window, $rootScope) {
+
+
 
   console.log(userService.user);
   $scope.craigslistData = [];
+
+  $scope.changeView = function(view){
+      $location.path(view); // path not hash
+  };
 
   var scrapedData = [];
 
@@ -37,7 +43,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
             $http.post('/detail', payload)
                 .success(function (data) {
                     jobDetailService.craigslist.push(data);
-                    console.log(jobDetailService.craigslist, ' craig detail')
+                    // console.log(jobDetailService.craigslist, ' craig detail')
 
                 })
                 .error(function (err) {
@@ -72,6 +78,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
   $scope.getIndeedDetail = function () {
      var listingData = $scope.indeedData;
+     console.log('firing')
 
      if(listingData) {
        for (var i = 0; i < listingData.length; i++) {
@@ -82,6 +89,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
                  jobDetailService.indeed.push(data);
                  console.log(jobDetailService.indeed, ' indeed detail');
                  formatIndeed();
+
              })
              .error(function (err) {
                  console.log(err, " error");
@@ -105,7 +113,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
       $http.post('/dice', payload)
           .success(function (data) {
               $scope.diceData = jobDetailService.dice.before = data.resultItemList;
-              console.log(jobDetailService.dice.before, " JDS dice before detail");
+              // console.log(jobDetailService.dice.before, " JDS dice before detail");
           })
           .error(function (err) {
               console.log(err, ' error');
@@ -122,7 +130,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
             $http.post('/dice-detail', payload)
                 .success(function (data) {
                     jobDetailService.dice.push(data);
-                    console.log(jobDetailService.dice, ' dice detail');
+                    // console.log(jobDetailService.dice, ' dice detail');
                     formatDice();
                 })
                 .error(function (err) {
@@ -135,6 +143,19 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
   };
 
 
+   // $scope.formatAllJobs = function () {
+   //    var indeed = jobDetailService.indeed.formatted;
+   //    var craigs = jobDetailService.craigslist;
+   //    var dice   = jobDetailService.dice.formatted;
+   //    var total  = indeed.length + craigs.length + dice.length;
+   //    var jobs   = [];
+
+
+   //    console.log('indeed :', indeed, 'craigs: ', craigs, 'dice: ', dice, ' total ! ', total);
+
+   // };
+
+
    // open the modal for craigslist scrape button
    $scope.openModal = function () {
        var modalInstance = $uibModal.open({
@@ -144,8 +165,6 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
           backdrop: 'static'
         });
     };
-
-
 
    // helper function to remove the "found more jobs near denver" links...
    var rawCraigData = [];
@@ -166,7 +185,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
                title: title,
                url: 'https://denver.craigslist.org' + urlFrag
            });
-           console.log($scope.craigslistData, ' cldata before detail');
+           // console.log($scope.craigslistData, ' cldata before detail');
 
        }
        // not sure if this will work.
@@ -174,7 +193,6 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
   // helper function that adds the descrip from dice detail into JDS.dice.Formatted array.
   var formatDice = function () {
-    console.log('firing');
       var diceDetail = jobDetailService.dice;
       var dicePre = jobDetailService.dice.before;
       var holder = [];
@@ -190,7 +208,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
       jobDetailService.dice.formatted = holder;
   };
 
-
+  // console.log($scope.indeedFormatted, 'indeed formatted')
   // helper function that adds the descrip from dice detail into JDS.dice.Formatted array.
   var formatIndeed = function () {
       var indeedDetail = jobDetailService.indeed;
@@ -205,7 +223,16 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
           jobDetail.url = indeedPre[i].url;
           holder.push(jobDetail);
       }
-      jobDetailService.indeed.formatted = holder;
+      jobDetailService.indeed.formatted = $scope.indeedFormatted = holder;
+      console.log($scope.indeedFormatted, ' $scope.indeedFormatted');
   };
+
+
+  var myInit = function () {
+    $scope.getCraigslist();
+    $scope.getIndeed();
+    $scope.getDice();
+  };
+  angular.element(document).ready(myInit);
 
 }]);

@@ -1,11 +1,105 @@
-<div class="container">
+
+
+
+<!-- <div class="container">
   <div class="row">
     <div class="center-form panel">
-      <form method="post" ng-submit="login()" name="loginForm" novalidate>
+      <form  ng-submit="" name="l" novalidate>
         <div class="panel-body">
           <h2 class="text-center">Detail</h2>
+          <card></card>
+         <div ng-repeat="job in jobDetail">
+            <h1>{{job.title}}</h1>
+            <p>{{job.description}}</p>
+            <p>{{job.url}}</p>
+         </div>
         </div>
       </form>
     </div>
   </div>
+</div> -->
+
+<!-- <div class="panel-group col-xs-12" ng-repeat="job in jobDetail">
+  <div class="panel panel-default col-xs-12" >
+      <div class="panel-heading">{{job.title}}
+      </div>
+      <div class="panel-body">{{job.description}}
+      </div>
+      <div class="panel-footer">
+          <p>{{job.url}}</p>
+          <br>
+          <button ng-click="cut()">Nah</button>
+          <button ng-click="add()">Yes</button>
+      </div>
+  </div>
+  </div>
+</div> -->
+
+<div layout-fill>
+  <div layout="row" flex>
+    <div layout="column" flex>
+
+      <md-card ng-repeat="job in jobDetail" class="card">
+        <img ng-src="https://s-media-cache-ak0.pinimg.com/736x/eb/a7/13/eba713577fedf27587fd29577222c8fe.jpg" class="md-card-image" alt="Washed Out">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{job.title}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            {{job.description}}
+            - {{job.url}}
+          </p>
+        </md-card-content>
+        <md-card-actions layout="column" layout-align="start">
+          <md-button ng-click="remove(index)">Nah</md-button>
+          <md-button ng-click="add(); remove(index)">Yep</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+
 </div>
+
+ <!-- <div layout="row" flex>
+    <div layout="column" flex>
+
+      <md-card ng-repeat="job in jobDetail" class="card" flex>
+        <img ng-src="https://s-media-cache-ak0.pinimg.com/736x/eb/a7/13/eba713577fedf27587fd29577222c8fe.jpg" class="md-card-image" alt="Washed Out">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{job.title}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            {{job.description}}
+            - {{job.url}}
+          </p>
+        </md-card-content>
+        <md-card-actions layout="column" layout-align="start">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+
+  </div> -->
+
+<!-- <ul class="stack" swing-stack swing-options="options">
+    <li
+        swing-card
+        swing-on-throwout="throwout(eventName, eventObject)"
+        swing-on-throwoutleft="throwoutleft(eventName, eventObject)"
+        swing-on-throwoutright="throwoutright(eventName, eventObject)"
+        swing-on-throwin="throwin(eventName, eventObject)"
+        swing-on-dragstart="dragstart(eventName, eventObject)"
+        swing-on-dragmove="dragmove(eventName, eventObject)"
+        swing-on-dragend="dragend(eventName, eventObject)"
+        ng-repeat="card in cards" ng-class="card.name">
+        <h1>{{card.title}}</h1>
+        <p>{{card.description}}</p>
+        <p>{{card.url}}</p>
+
+    </li>
+</ul> -->
