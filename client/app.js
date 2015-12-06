@@ -77,8 +77,8 @@ app.config(function ($routeProvider, $authProvider, $locationProvider) {
             controller: 'jobsCtrl'
         })
 
-        .when('/jobDetail', {
-            templateUrl: 'partials/modalTemplate.html'
+        .when('/detail', {
+            templateUrl: 'partials/detail.html'
         });
 
         // .otherwise('/');

@@ -1,5 +1,14 @@
 app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal', 'jobDetailService', 'userService', function ($scope, $auth, $location, $http, $uibModal, jobDetailService, userService) {
 
+
+  $scope.$watch( function () {
+    return $location.path();
+    },
+    function (path) {
+      $scope.path = path;
+    }
+  );
+
   console.log(userService.user);
   $scope.craigslistData = [];
 
@@ -19,6 +28,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
     $http.post('/scrape', payload)
         .success(function(data) {
             scrapedData = data;
+            console.log(scrapedData, 'scraped cl')
             limitCraig();
         })
         .error(function(err) {
@@ -150,6 +160,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
    var rawCraigData = [];
    var limitCraig = function () {
        for (var i = 0; i < 60; i ++) {
+          console.log(rawCraigData, 'raw craig')
            rawCraigData.push(scrapedData[i]);
        }
        formatCraig();

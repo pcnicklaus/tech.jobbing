@@ -1,0 +1,21 @@
+{
+  "name": "mean-token-auth",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Patrick <pcnicklaus@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-http-loader": "~0.1.4"
+  }
+}
