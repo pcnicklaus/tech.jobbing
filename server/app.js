@@ -12,7 +12,9 @@ var config = require('../_config');
 
 
 // connect to mongo
-mongoose.connect("mongodb://localhost/lazyJobs");
+// mongoose.connect("mongodb://localhost/lazyJobs");
+
+ mongoose.connect(process.env.MONGOLAB_URI || "mongodb://localhost/lazyJobs");
 
 // *** express instance *** //
 var app = express();

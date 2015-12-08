@@ -12,7 +12,6 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
   // scrape the titles and url 60 off craiglist
   $scope.getCraigslist = function () {
-    console.log('firing')
     var holder = userService.user.searchKeyword;
     var searchPhrase = holder.replace(' ', '%20');
 
@@ -24,7 +23,6 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
     $http.post('/scrape', payload)
         .success(function(data) {
             scrapedData = data;
-            console.log(scrapedData, 'scrapeddata')
             limitCraig();
         })
         .error(function(err) {
@@ -77,7 +75,6 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
   $scope.getIndeedDetail = function () {
      var listingData = $scope.indeedData;
-     console.log('firing')
 
      if(listingData) {
        for (var i = 0; i < listingData.length; i++) {
@@ -99,7 +96,6 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
 
    $scope.getDice = function () {
-      console.log('firing');
 
       var cityState = userService.user.searchCity + ",+" + userService.user.searchState + "&";
 
@@ -170,7 +166,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
                title: title,
                url: 'https://denver.craigslist.org' + urlFrag
            });
-           console.log($scope.craigslistData, ' cldata before detail');
+           // console.log($scope.craigslistData, ' cldata before detail');
 
        }
    };
@@ -180,7 +176,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
       var diceDetail = jobDetailService.dice;
       var dicePre = jobDetailService.dice.before;
       var holder = [];
-      console.log(diceDetail.length, 'dice length');
+      // console.log(diceDetail.length, 'dice length');
 
       for (var i = 0; i < diceDetail.length; i ++) {
           var jobDetail = {};
