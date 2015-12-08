@@ -1,9 +1,8 @@
 app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal', 'jobDetailService', 'userService', '$window', '$rootScope', function ($scope, $auth, $location, $http, $uibModal, jobDetailService, userService, $window, $rootScope) {
 
-
-
   console.log(userService.user);
   $scope.craigslistData = [];
+  $scope.allJobs = [];
 
   $scope.changeView = function(view){
       $location.path(view); // path not hash
@@ -13,7 +12,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
   // scrape the titles and url 60 off craiglist
   $scope.getCraigslist = function () {
-
+    console.log('firing')
     var holder = userService.user.searchKeyword;
     var searchPhrase = holder.replace(' ', '%20');
 
@@ -25,6 +24,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
     $http.post('/scrape', payload)
         .success(function(data) {
             scrapedData = data;
+            console.log(scrapedData, 'scrapeddata')
             limitCraig();
         })
         .error(function(err) {
@@ -43,12 +43,11 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
             $http.post('/detail', payload)
                 .success(function (data) {
                     jobDetailService.craigslist.push(data);
-                    // console.log(jobDetailService.craigslist, ' craig detail')
-
                 })
                 .error(function (err) {
                     console.log(err, " error");
                 });
+
           }
       }
   };
@@ -68,7 +67,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
       $http.post('/indeed', payload)
           .success(function (data) {
               $scope.indeedData = data.results;
-              console.log($scope.indeedData, ' indeed before detail')
+              // console.log($scope.indeedData, ' indeed before detail')
           })
           .error(function (err) {
               console.log(err, ' error');
@@ -87,7 +86,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
          $http.post('/indeed-detail', payload)
              .success(function (data) {
                  jobDetailService.indeed.push(data);
-                 console.log(jobDetailService.indeed, ' indeed after detail');
+                 // console.log(jobDetailService.indeed, ' indeed after detail');
                  formatIndeed();
 
              })
@@ -100,6 +99,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
 
    $scope.getDice = function () {
+      console.log('firing');
 
       var cityState = userService.user.searchCity + ",+" + userService.user.searchState + "&";
 
@@ -136,24 +136,9 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
                 .error(function (err) {
                     console.log(err, " error");
                 });
-
         }
-
     }
   };
-
-
-   // $scope.formatAllJobs = function () {
-   //    var indeed = jobDetailService.indeed.formatted;
-   //    var craigs = jobDetailService.craigslist;
-   //    var dice   = jobDetailService.dice.formatted;
-   //    var total  = indeed.length + craigs.length + dice.length;
-   //    var jobs   = [];
-
-
-   //    console.log('indeed :', indeed, 'craigs: ', craigs, 'dice: ', dice, ' total ! ', total);
-
-   // };
 
 
    // open the modal for craigslist scrape button
@@ -185,10 +170,9 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
                title: title,
                url: 'https://denver.craigslist.org' + urlFrag
            });
-           // console.log($scope.craigslistData, ' cldata before detail');
+           console.log($scope.craigslistData, ' cldata before detail');
 
        }
-       // not sure if this will work.
    };
 
   // helper function that adds the descrip from dice detail into JDS.dice.Formatted array.
@@ -196,6 +180,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
       var diceDetail = jobDetailService.dice;
       var dicePre = jobDetailService.dice.before;
       var holder = [];
+      console.log(diceDetail.length, 'dice length');
 
       for (var i = 0; i < diceDetail.length; i ++) {
           var jobDetail = {};
@@ -203,12 +188,13 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
           jobDetail.description = diceDetail[i].description;
           jobDetail.compensation = '';
           jobDetail.url = dicePre[i].detailUrl;
+          jobDetail.alchemy;
           holder.push(jobDetail);
       }
       jobDetailService.dice.formatted = holder;
+
   };
 
-  // console.log($scope.indeedFormatted, 'indeed formatted')
   // helper function that adds the descrip from dice detail into JDS.dice.Formatted array.
   var formatIndeed = function () {
       var indeedDetail = jobDetailService.indeed;
@@ -221,11 +207,13 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
           jobDetail.description = indeedDetail[i].description;
           jobDetail.compensation = '';
           jobDetail.url = indeedPre[i].url;
+          jobDetail.alchemy = [];
           holder.push(jobDetail);
       }
       jobDetailService.indeed.formatted = $scope.indeedFormatted = holder;
-      console.log($scope.indeedFormatted, ' $scope.indeedFormatted');
+
   };
+
 
 
   var myInit = function () {
@@ -236,3 +224,85 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
   angular.element(document).ready(myInit);
 
 }]);
+
+
+ // $scope.setAllJobs = function () {
+ //    var totalAllJobs = [];
+ //    var craig = jobDetailService.craiglist || [];
+ //    var indeed = jobDetailService.indeed.formatted || [];
+ //    var dice = jobDetailService.dice.formatted ||[];
+ //    // var craigYes = false;
+ //    // var indeedYes = false;
+ //    // var diceYes = false;
+
+
+
+ //    totalAllJobs = craig.concat(indeed).concat(dice);
+ //    jobDetailService.alljobs = totalAllJobs;
+ //    console.log(jobDetailService.alljobs , 'total all jobs !!');
+
+ //  };
+  //   if (craig) {
+  //     craigYes = true;
+  //   }
+  //   if (dice) {
+  //     diceYes = true;
+  //   }
+  //   if (indeed) {
+  //     indeedYes = true;
+  //   }
+
+  //   var total;
+
+
+  //   if (indeedYes === true && diceYes === true && craigYes === true) {
+  //     total = jobDetailService.indeed.formatted.length + jobDetailService.dice.formatted.length + jobDetailService.craiglist.length;
+  //     console.log(jobDetailService.allJobs, "JDS all jobs");
+  //   } else if (indeedYes === true && diceYes === true && craigYes === false) {
+  //     total = jobDetailService.indeed.formatted.length + jobDetailService.dice.formatted.length;
+  //   } else if (indeedYes === true && diceYes === false && craigYes === true) {
+  //     total = jobDetailService.indeed.formatted.length + jobDetailService.craiglist.length;
+  //   } else if (indeedYes === false && diceYes === true && craigYes === true) {
+  //     total = jobDetailService.dice.formatted.length + jobDetailService.craiglist.length;
+  //   } else if (indeedYes === false && diceYes === false && craigYes === true) {
+  //     total = jobDetailService.craiglist.length;
+  //   } else if (indeedYes === false && diceYes === true && craigYes === false) {
+  //     total = jobDetailService.dice.formatted.length;
+  //   } else if (indeedYes === true && diceYes === false && craigYes === false) {
+  //     total = jobDetailService.indeed.formatted.length;
+  //   }
+
+  //   for (var i = 0; i < length; i ++) {
+  //     if (indeedYes === true && diceYes === true && craigYes === true) {
+  //       totalAllJobs.push(craig[i]);
+  //       totalAllJobs.push(dice[i]);
+  //       totalAllJobs.push(craig[i]);
+  //       jobDetailService.allJobs = totalAllJobs;
+  //       console.log(jobDetailService.allJobs, "JDS all jobs");
+  //     } else if (indeedYes === true && diceYes === true && craigYes === false) {
+  //       totalAllJobs.push(indeed[i]);
+  //       totalAllJobs.push(dice[i]);
+  //       jobDetailService.allJobs = totalAllJobs;
+  //     } else if (indeedYes === true && diceYes === false && craigYes === true) {
+  //       totalAllJobs.push(indeed[i]);
+  //       totalAllJobs.push(craig[i]);
+  //       jobDetailService.allJobs = totalAllJobs;
+  //     } else if (indeedYes === false && diceYes === true && craigYes === true) {
+  //       totalAllJobs.push(dice[i]);
+  //       totalAllJobs.push(craig[i]);
+  //       jobDetailService.allJobs = totalAllJobs;
+  //     } else if (indeedYes === false && diceYes === false && craigYes === true) {
+  //       totalAllJobs.push(craig[i]);
+  //       jobDetailService.allJobs = totalAllJobs;
+  //     } else if (indeedYes === false && diceYes === true && craigYes === false) {
+  //       totalAllJobs.push(dice[i]);
+  //       jobDetailService.allJobs = totalAllJobs;
+  //     } else if (indeedYes === true && diceYes === false && craigYes === false) {
+  //       totalAllJobs.push(craig[i]);
+  //       jobDetailService.allJobs = totalAllJobs;
+  //     }
+
+  //     console.log(jobDetailService.allJobs, 'all jobs at the end of the function');
+  // }
+
+  // };

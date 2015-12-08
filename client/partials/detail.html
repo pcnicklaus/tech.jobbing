@@ -1,6 +1,52 @@
 
 
 
+<div class="container-fluid main" id="page-top">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 some-notes">
+            <div class="title">
+            </div>
+            <div class="desc col-md-8 col-md-offset-2 parent">
+
+                <div class="panel panel-default card animated" ng-repeat="job in jobDetail track by $index">
+                  <p>selected: {{ selected }}, job.selected: {{job.selected}}</p>
+                  <div ng-class='{animatedClassRight: !selected, animatedClassLeft: selected}' ng-if="job.selected === undefined">
+                      <div>
+                        <button class="btn btn-block btn-success" ng-click="switchAnimate(job, true)">Add it</button>
+                        <button class="btn btn-block btn-danger" ng-click="switchAnimate(job, false)">Remove it</button>
+                      </div>
+
+
+                      <div class="panel-heading">
+                          <h4 class="panel-title">{{job.title}}</h4>
+                      </div>
+
+                      <div class="panel-body">
+                          <p class="panel-text">{{job.description}}</p>
+                      </div>
+
+                      <ul class="list-group list-group-flush">
+                          <a href="{{job.url}}" target="_blank" <li class="list-group-item">Original Posting</li></a>
+                          <li ng-show="job.compensation"class="list-group-item">{{job.compensation}}</li>
+                      </ul>
+
+                      <div class="panel-footer">
+
+                      </div>
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 <!-- <div class="container">
   <div class="row">
     <div class="center-form panel">
@@ -35,7 +81,7 @@
   </div>
 </div> -->
 
-<div layout-fill>
+<!-- <div layout-fill>
   <div layout="row" flex>
     <div layout="column" flex>
 
@@ -59,7 +105,7 @@
       </md-card>
     </div>
 
-</div>
+</div> -->
 
  <!-- <div layout="row" flex>
     <div layout="column" flex>

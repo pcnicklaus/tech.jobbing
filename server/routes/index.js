@@ -10,26 +10,29 @@ var config    = require('../../_config.js');
 
 router.post('/mail', function (req, res, next) {
 
-    console.log(req.body)
+    // console.log(' req.body.title   ', req.body.title[0].description)
+    var text = req.body.jobs;
+    var email = JSON.stringify(req.body.email);
+
+    var emailMessage = '';
+    for (var i = 0; i < text.length; i++) {
+      emailMessage += '<br> Title:' + text[i].title + '<br> Description:' + text[i].description + '<br>Link:' + text[i].url + '<br>';
+    }
     // create reusable transporter object using SMTP transport
     var transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: 'pcnicklaus@gmail.com',
-            pass: '******'
+            user: 'techjobbing@gmail.com',
+            pass: ''
         }
     });
 
-    // NB! No need to recreate the transporter object. You can use
-    // the same transporter object for all e-mails
-
-    // setup e-mail data with unicode symbols
-    var mailOptions = {
-        from: 'Patrick ✔ <pcnicklaus@gmail.com>', // sender address
-        to: 'pcnicklaus@gmail.com, cullenmichaelyates@hotmail.com', // list of receivers
-        subject: 'Hello ✔', // Subject line
-        text: 'Hello world ✔', // plaintext body
-        html: '<b>' + req.body + ' ✔</b>' // html body
+      var mailOptions = {
+        from: 'Patrick ✔ <techjobbing@gmail.com>', // sender address
+        to: email, // list of receivers
+        subject: 'Your Jobs ✔', // Subject line
+        text: emailMessage, // plaintext body
+        html: '<b>' + emailMessage + ' ✔</b>' // html body
     };
 
     // send mail with defined transport object
@@ -45,10 +48,12 @@ router.post('/mail', function (req, res, next) {
 router.post('/analyze', function(req, res){
   // console.log(req.params, "REQ")
   var description = req.body.description;
-  // console.log(paragraph, "PARAGRAPH")
+  var cleaned = description.replace(/"/g, '');
+  var cleaned2 = cleaned.replace('/', '');
+  console.log("descript req.body", cleaned)
   request({
     method: 'POST',
-    url: 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords?text='+description+'&'+ config.alchemy +'&outputMode=json&sentiment=1&showSourceText=1'
+    url: 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords?text='+cleaned2+'&apikey=37567811ebc78a1b9dd621a767d2dea154983431&outputMode=json&sentiment=1&showSourceText=1'
   }, function(err, response){
     if(err){
       console.log('err', err);
