@@ -7,7 +7,7 @@ app.controller('navbarCtrl', function($scope, $window, $auth, $location) {
   $scope.logout = function() {
     $auth.logout();
     delete $window.localStorage.currentUser;
-    $location.path('/');
+    $location.path('/home');
   };
 
 });

@@ -13,10 +13,20 @@ app.service('jobDetailService', function () {
 
   this.myJobs = [];
 
+  this.allJobs = []
+
+  // this.setJobs = function (array) {
+  //   var self = this;
+  //   console.log(array, ' array in setJobs')
+  //   for (var i = 0; i <)
+  // };
+
   return {
     craigslist: this.craigslist,
     dice: this.dice,
-    indeed: this.indeed
+    indeed: this.indeed,
+    allJobs: this.allJobs,
+    setJobs: this.setJobs
   };
 
 });

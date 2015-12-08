@@ -5,14 +5,17 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-
+var dotenve = require('dotenv');
+dotenv.load();
 
 // *** config file *** //
 var config = require('../_config');
 
 
 // connect to mongo
-mongoose.connect("mongodb://localhost/lazyJobs");
+// mongoose.connect("mongodb://localhost/lazyJobs");
+
+ mongoose.connect(process.env.MONGOLAB_URI || "mongodb://localhost/lazyJobs");
 
 // *** express instance *** //
 var app = express();

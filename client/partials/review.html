@@ -1,35 +1,49 @@
-<md-button ng-click="sendEmail(index)">send your self those jobs huh???</md-button>
-<div layout-fill>
-  <div layout="row" flex>
-    <div flex="50" layout="column" flex>
 
-      <md-card ng-repeat="job in myJobs">
-        <img ng-src="https://s-media-cache-ak0.pinimg.com/736x/eb/a7/13/eba713577fedf27587fd29577222c8fe.jpg" class="md-card-image" alt="Washed Out">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">{{job.title}}</span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-          <p>
-            {{job.description}}
-            - {{job.url}}
-          </p>
-        </md-card-content>
 
-        <md-card-content ng-show="alchemyData" ng-repeat="data in alchemyData">
-          <ul>
-            <li>keyword: {{data.text}} - relevance: {{data.relevance}} - type: {{data.sentiment.type}} - score: {{data.sentiment.score}}
-          </ul>
 
-        </md-card-content>
+<div class="container-fluid main" id="page-top">
+    <div class="row">
+        <!-- <div class="col-md-10 col-md-offset-1 some-notes">
+            <div class="title">
+                <button class="btn btn-block" ng-click="sendEmail(index)">email these to yourself?</button>
+            </div>
+        </div> -->
+        <br>
+        <br>
+            <div class="desc col-md-2">
+            </div>
+            <div class="desc col-md-8">
+                    <div class="panel panel-default" ng-repeat="job in myJobs track by $index">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">{{job.title}}</h4>
+                        </div>
+                        <div class="panel-body"
+                            <p class="panel-text">{{job.description}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <a href="{{job.url}}" target="_blank" <li class="list-group-item">Original Posting</li></a>
+                            <li ng-show="job.compensation"class="list-group-item">{{job.compensation}}</li>
+                        </ul>
 
-        <md-card-actions layout="column" layout-align="start">
+                       <!--  <ul ng-show="job.alchemy.length" class="list-group list-group-flush" >
+                            <li class="list-group-item">Keyword: {{job.alchemy.text}}</li>
+                            <li class="list-group-item">Relevance: {{job.alchemy.relevance}}</li>
+                            <li class="list-group-item">type: {{job.alchemy.sentiment.type}}</li>
+                            <li class="list-group-item">score: {{job.alchemy.sentiment.score}}</li>
+                        </ul> -->
 
-          <md-button ng-click="remove(index)">Nah</md-button>
-          <md-button ng-click="analyze()">Analyse it for me</md-button>
-        </md-card-actions>
-      </md-card>
+                        <div class="panel-footer">
+                            <button class="btn btn-block btn-success" ng-click="analyze($index)">Analyze it</button>
+                            <button class="btn btn-block btn-default" ng-click="sendEmail(index)">Email it</button>
+                            <button class="btn btn-block btn-danger" ng-click="remove(index)">Remove it</button>
+                        </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 </div>
+
+
+
+
+
