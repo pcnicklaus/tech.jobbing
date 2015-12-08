@@ -1,4 +1,4 @@
-var app = angular.module('MyApp', ['ngRoute', 'satellizer', 'ui.bootstrap', 'ngMaterial', 'gajus.swing', 'ngAnimate'])
+var app = angular.module('MyApp', ['ngRoute', 'satellizer', 'ui.bootstrap', 'ngAnimate'])
 
 .config(function ($routeProvider, $authProvider, $locationProvider) {
 
