@@ -5,3 +5,4 @@ _config.js
 capstone.md
 bower_components
 config.js
+.env

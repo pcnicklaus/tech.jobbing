@@ -5,6 +5,7 @@ var cheerio   = require('cheerio');
 var request   = require('request');
 var User      = require('../models/users.js');
 var nodemailer = require('nodemailer');
+require('dotenv').load();
 
 var config    = require('../../_config.js');
 
@@ -23,7 +24,7 @@ router.post('/mail', function (req, res, next) {
         service: 'Gmail',
         auth: {
             user: 'techjobbing@gmail.com',
-            pass: ''
+            pass: process.env.GOOGLE
         }
     });
 
@@ -53,7 +54,7 @@ router.post('/analyze', function(req, res){
   console.log("descript req.body", cleaned)
   request({
     method: 'POST',
-    url: 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords?text='+cleaned2+'&apikey=37567811ebc78a1b9dd621a767d2dea154983431&outputMode=json&sentiment=1&showSourceText=1'
+    url: 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords?text='+cleaned2+'&apikey=' + process.env.ALCHEMY + '&outputMode=json&sentiment=1&showSourceText=1'
   }, function(err, response){
     if(err){
       console.log('err', err);
