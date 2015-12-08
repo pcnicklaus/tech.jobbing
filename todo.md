@@ -1,4 +1,7 @@
-
+NEWEST...
+- tindering it up
+- how to save the alchemy info to each job
+- saved jobs view
 
 xx-- make the searches dynamic
 
@@ -6,13 +9,13 @@ xx-- make the searches dynamic
 - spinny screen while waiting for data...
 
 ui / ux
-- the tinder of job search.
-- the question you gotta ask is...
-...would 'ya do that job?
-- splash view
-- splash second view
+x- the tinder of job search.
+x- the question you gotta ask is...
+x...would 'ya do that job?
+x- splash view
+x- splash second view
   - how to jobing
-- create
+x- create
   - job selection criteria
     - save to user
   - login upon completion

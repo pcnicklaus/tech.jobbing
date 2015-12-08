@@ -2,54 +2,64 @@ app.controller('reviewCtrl', ['$scope', '$rootScope', '$http', '$window', 'userS
 
   var myInit = function () {
     $scope.myJobs = jobDetailService.myJobs;
-
   };
   angular.element(document).ready(myInit);
 
-   $scope.remove = function (index) {
+
+  $scope.remove = function (index) {
     $scope.myJobs.splice(index, 1);
   };
 
+  // console.log('ll jobs', jobDetailService.all);
+  // console.log('scope all jobs', $scope.allJobs);
+  // console.log($scope.myJobs, ' scope my jobs');
 
-  console.log($scope.myJobs, 'myjobs in reveiw ctrl ')
+  var user = JSON.parse(localStorage.getItem('currentUser'));
+  var userEmail = JSON.parse(localStorage.getItem('currentUser'));
 
   $scope.sendEmail = function () {
 
-    var test =JSON.stringify($scope.myJobs)
-    console.log(test.description, test.title, 'testeeeee')
+    var jobs = $scope.myJobs;
 
-      // var payload = {
-      //   title: JSON.Stringify($scope.myJobs)
-      // };
-      // console.log(payload.jobs, ' jobs');
-
-      // $http.post('/mail', payload)
-      //       .success(function(data) {
-      //           scrapedData = data;
-      //           limitCraig();
-      //       })
-      //       .error(function(err) {
-      //           console.log(err, 'error');
-      //       });
-
-
-  };
-
-  $scope.analyze = function (index) {
       var payload = {
-        description: this.job.description
+        jobs: jobs,
+        email: userEmail
       };
-      console.log(payload);
-      var alchemyData;
-       $http.post('/analyze', payload)
+      console.log(payload.title, ' jobs');
+
+      $http.post('/mail', payload)
             .success(function(data) {
-                $scope.alchemyData = data;
-                console.log(alchemyData);
+                var responseData = data;
+                console.log(responseData, 'resposne data');
             })
             .error(function(err) {
                 console.log(err, 'error');
             });
 
-  }
+
+  };
+
+  // $scope.saveJob = function () {
+  //   console.log(user, ' save job');
+  // }
+
+  $scope.analyze = function ($index) {
+
+      var payload = {
+        description: this.job.description
+      };
+
+      var alchemyData;
+       $http.post('/analyze', payload)
+            .success(function(data) {
+                $scope.myJobs[$index].alchemy = data;
+                console.log($scope.myJobs[$index], ' scope alchemy RETURN')
+            })
+            .error(function(err) {
+                console.log(err, 'error');
+            });
+
+
+  };
 
 }]);

@@ -1,24 +1,42 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
-
-      <h3>Currently, we got...</h3>
-      <div>
-        <button class="btn btn-block btn-default" ng-click="getCraigslistDetail()">Craigslist</button>
-      </div>
-      <div>
-        <button class="btn btn-block btn-default" ng-click="getIndeedDetail()">Indeed</button>
-      </div>
-      <div>
-        <button class="btn btn-block btn-default" ng-click="getDiceDetail()">Dice</button>
-      </div>
-      <br>
-      <div>
-        <button class="btn btn-block btn-default" ng-click="changeView('/detail')">Let's see 'em</button>
-      </div>
+<div class="container-fluid main" id="page-top">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 some-notes">
+            <div class="title">
+                <h2>Currently, you can search...</h2>
+            </div>
+            <div class="desc col-md-8 col-md-offset-2">
+                <form>
+                  <div>
+                      <button class="btn btn-block btn-default" ng-click="getCraigslistDetail()">Craigslist</button>
+                  </div>
+                  <br>
+                  <div>
+                      <button class="btn btn-block btn-default" ng-click="getIndeedDetail()">Indeed</button>
+                  </div>
+                  <br>
+                  <div>
+                      <button class="btn btn-block btn-default" ng-click="getDiceDetail()">Dice</button>
+                  </div>
+                  <br>
+                  <br>
+                  <div>
+                      <button class="btn btn-block btn-default" ng-click="changeView('/detail'); setAllJobs()">Let's see 'em</button>
+                  </div>
+               </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+
+
+<!-- <ul ng-show="job.alchemy" class="list-group list-group-flush">
+    <li class="list-group-item">Keyword: {{data.text}}</li>
+    <li class="list-group-item">Relevance: {{data.relevance}}</li>
+    <li class="list-group-item">type: {{data.sentiment.type}}</li>
+    <li class="list-group-item">score: {{data.sentiment.score}}</li>
+</ul> -->
+
+
 
 <!--  <button class="btn btn-block btn-default" ng-click="changeView('/detail')"><a href="#/detail">Let's see 'em</a></button>
  -->

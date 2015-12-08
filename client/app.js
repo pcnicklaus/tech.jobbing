@@ -1,6 +1,6 @@
-var app = angular.module('MyApp', ['ngRoute', 'satellizer', 'ui.bootstrap', 'ngMaterial']);
+var app = angular.module('MyApp', ['ngRoute', 'satellizer', 'ui.bootstrap', 'ngMaterial', 'gajus.swing', 'ngAnimate'])
 
-app.config(function ($routeProvider, $authProvider, $locationProvider) {
+.config(function ($routeProvider, $authProvider, $locationProvider) {
 
     // *** satellizer settings *** //
     $authProvider.github({
@@ -97,6 +97,28 @@ app.config(function ($routeProvider, $authProvider, $locationProvider) {
         // .otherwise('/');
 
 });
+
+// .animation('.fade', function() {
+//   return {
+//     // enter: function(element, done) {
+//     //   element.css('display', 'none');
+//     //   $(element).fadeIn(1000, function() {
+//     //     done();
+//     //   });
+//     // },
+//     leave: function(element, done) {
+//       $(element).slideOut(1000, function() {
+//         done();
+//       });
+//     }
+//     // move: function(element, done) {
+//     //   element.css('display', 'none');
+//     //   $(element).slideDown(500, function() {
+//     //     done();
+//     //   });
+//     // }
+//   }
+// })
 
 // app.run(function ($rootScope, $location, $route, $auth) {
 //     $rootScope.$on('$routeChangeStart', function (event, next, current) {
