@@ -1,4 +1,4 @@
-@charset "utf-8";
+/*@charset "utf-8";
 /* CSS Document */
 
 html,
@@ -76,7 +76,7 @@ footer {
 .logo
 {
   color: #fa3447;
-  font-weight: 100;
+  font-weight: 350;
   font-size: 30px;
   padding: 0px !important;
   line-height: 60px;
@@ -93,7 +93,7 @@ footer {
 }
 .menu li a
 {
-  color: #434F5B;
+  color: white;
   font-weight:500;
   font-family: 'Poppins', sans-serif;
   line-height: 29px;
@@ -112,6 +112,9 @@ footer {
   font-size: 30px;
   margin:0px !important;
   padding:14px;
+}
+.footer {
+  color: white;
 }
 .backg
 {
@@ -633,3 +636,4 @@ footer p a {
     width: 80% !important;
 }
 }
+*/
