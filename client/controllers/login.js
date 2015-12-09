@@ -19,7 +19,7 @@ app.controller('loginCtrl', ['$scope', '$auth', '$rootScope', '$window', '$locat
 
         $window.localStorage.currentUser = JSON.stringify(response.data.user);
         $rootScope.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        $location.path('/search');
+        $location.path('/jobs');
       })
       .catch(function(response) {
         console.log(response);

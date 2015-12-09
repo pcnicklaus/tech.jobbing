@@ -1,9 +1,10 @@
 app.controller('signupCtrl', ['$scope', '$http', '$auth', '$location', 'userService', function($scope, $http, $auth, $location, userService) {
 
   $scope.signup = function() {
+    console.log('figin')
 
     var user = {
-      name: $scope.firstName,
+      // name: $scope.firstName,
       email: $scope.email,
       password: $scope.password,
       searchTitle: $scope.searchTitle,
@@ -13,7 +14,7 @@ app.controller('signupCtrl', ['$scope', '$http', '$auth', '$location', 'userServ
       myJobs: []
     };
 
-    userService.user.name = user.name;
+    // userService.user.name = user.name;
     userService.user.searchTitle = user.searchTitle;
     userService.user.searchKeyword = user.searchKeyword;
     userService.user.searchState = user.searchState;

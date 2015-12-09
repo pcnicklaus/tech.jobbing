@@ -1,6 +1,30 @@
 @charset "utf-8";
 /* CSS Document */
 
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+#container {
+   min-height:100%;
+   position:relative;
+}
+
+.review {
+  margin-top: 30px;
+}
+
+
+footer {
+   /*position:absolute;*/
+   /*bottom:0;*/
+   width:100%;
+   height:60px;   /* Height of the footer */
+   background: #212A3F;
+
+}
 
 .animatedClassRight.ng-leave {
     -webkit-animation: slideOutRight 1s;
@@ -16,58 +40,14 @@
     animation: slideOutLeft 1s;
   }
 
+/*NEED TO WORK ON STYLES*/
 
-
-
-/*
-.fade-in-out {
-  transition: 1s linear all;
-  left: 0;
+.jobDetail{
+  margin-top: 30px;
 }
-
-.fade-in-out.ng-hide {
-  left: -5;
-}
-*/
-/*div[ng-view].ng-click {
-    -webkit-animation: fadeInRight 0.5s;
-    animation: fadeInRight 0.5s;
-}*/
-
-/*.slideOutRight {
-  -webkit-animation-name: slideOutRight;
-  animation-name: slideOutRight;
-}
-
-@-webkit-keyframes slideOutUp {
-  from {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    visibility: hidden;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-}
-
-@keyframes slideOutUp {
-  from {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    visibility: hidden;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-}
-*/
-
 .main {
-  padding-top: 40px;
+  margin-top: 100px;
+  height: 80vh;
 }
 
 .card {
@@ -81,6 +61,7 @@
 
 .parent {
   height: 80vh;
+  margin-bottom: -10px;
 }
 
 .header
@@ -142,7 +123,7 @@
     background-size: cover;
     color: white;
     cursor: default;
-    padding: 180px 0 120px;
+    padding: 180px 0 30px;
     text-align: center;
     width: 100%;
     float: left;
@@ -233,6 +214,23 @@
   transition: all 0.2s ease-in-out;
   font-family: 'Poppins', sans-serif;
   }
+
+
+a.link-button
+{
+  text-decoration: none;
+  color: #fff;
+  border: #fff solid 1px;
+  padding: 15px 22px;
+  margin-top: 20px;
+  line-height: 4;
+  font-size: 18px;
+  font-weight: 400;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease-in-out;
+  font-family: 'Roboto', sans-serif;
+  }
+
 .text-box p a.link-button:hover
 {
   background: rgba(255, 255, 255, 0.3);
@@ -253,20 +251,23 @@
 }
 .desc p
 {
-  width: 75%;
+  background: rgba(33, 42, 63, 0.5);
+    width: 75%;
   margin: 0 auto;
   font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  color: #2E2E2E;
+  font-weight: 600;
+  color: white;
   font-size: 16px;
   text-align: center;
   line-height: 25px;
 
 }
+
+
 .desc p a
 {
   text-decoration: none;
-  color: #8ab839;
+  color: white;
 }
 .features
 {
@@ -548,18 +549,21 @@ input[placeholder], [placeholder], *[placeholder] {
     font-size: 15px;
     color: #8AB839;
 }
-.footer {
-    margin: 20px 0px 10px;
+/*.footer {
+    margin: 20px 0 10px 0;
     float: left;
     text-align: center;
     width: 100%;
-}
-.footer p {
+    background: #212A3F;
+    height: 60px;
+}*/
+footer p {
+  padding-top: 20px;
   text-align:  center;
 
   font-family: 'Poppins', sans-serif;
 }
-.footer p a {
+footer p a {
  color: #8AB839;
  font-family: 'Poppins', sans-serif;
 }

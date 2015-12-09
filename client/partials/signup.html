@@ -1,28 +1,40 @@
-<h1>Signup</h1>
-<form method="post" ng-submit="signup()" name="signupForm">
-    <div class="form-group">
-        <input class="form-control input-lg" type="text" id="firstName" name="firstName" ng-model="firstName" placeholder="firstName" required>
-    </div>
-    <div class="form-group">
-        <input class="form-control input-lg" type="text" id="email" name="email" ng-model="email" placeholder="Email" required>
-    </div>
-    <div class="form-group">
-        <input class="form-control input-lg" type="password" name="password" ng-model="password" placeholder="Password" required>
-    </div>
-    <div class="form-group">
-        <input class="form-control input-lg" type="text" name="searchTitle" ng-model="searchTitle" placeholder="Job Title" required>
-    </div>
-    <div class="form-group">
-        <input class="form-control input-lg" type="text" name="searchKeyword" ng-model="searchKeyword" placeholder="Keyword" required>
-    </div>
-    <div class="form-group">
-        <input class="form-control input-lg" type="text" name="searchCity" ng-model="searchCity" placeholder="City" required>
-    </div>
-    <div class="form-group">
-        <input class="form-control input-lg" type="text" name="searchState" ng-model="searchState" placeholder="State" required>
-    </div>
+<div class="container-fluid main" id="page-top">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 some-notes">
+            <div class="title">
+                <h2>Sign Up</h2>
+            </div>
+            <div class="desc col-md-8 col-md-offset-2">
+                <form method="post" ng-submit="signup()" name="signupForm">
+                    <!-- <div class="form-group">
+                        <input class="form-control input-lg" type="text" id="firstName" name="firstName" ng-model="First Name" placeholder="firstName" required>
+                    </div> -->
+                    <div class="form-group">
+                        <input class="form-control input-lg" type="text" id="email" name="email" ng-model="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" type="password" name="password" ng-model="password" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" type="text" name="searchTitle" ng-model="searchTitle" placeholder="Job Title" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" type="text" name="searchKeyword" ng-model="searchKeyword" placeholder="Keyword" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" type="text" name="searchCity" ng-model="searchCity" placeholder="City" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" type="text" name="searchState" ng-model="searchState" placeholder="State" required>
+                    </div>
 
 
-    <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
-</form>
+                    <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 

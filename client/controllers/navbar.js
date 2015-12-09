@@ -10,4 +10,8 @@ app.controller('navbarCtrl', function($scope, $window, $auth, $location) {
     $location.path('/home');
   };
 
+  // $scope.isActive = function(route) {
+  //         return route === $location.path();
+  //     };
+
 });

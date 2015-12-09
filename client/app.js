@@ -33,7 +33,7 @@ var app = angular.module('MyApp', ['ngRoute', 'satellizer', 'ui.bootstrap', 'ngA
     });
 
     $routeProvider
-        .when('/', {
+        .when('/home', {
             templateUrl: 'partials/welcome.html',
             access: {
                 restricted: false
@@ -43,7 +43,8 @@ var app = angular.module('MyApp', ['ngRoute', 'satellizer', 'ui.bootstrap', 'ngA
             templateUrl: 'partials/home.html',
             access: {
                 restricted: false
-            }
+            },
+            controller: 'navbarCtrl'
         })
         .when('/login', {
             templateUrl: 'partials/login.html',
@@ -92,9 +93,9 @@ var app = angular.module('MyApp', ['ngRoute', 'satellizer', 'ui.bootstrap', 'ngA
         .when('/review', {
             templateUrl: 'partials/review.html',
             controller: 'reviewCtrl'
-        });
+        })
 
-        // .otherwise('/');
+        .otherwise('/home');
 
 });
 
