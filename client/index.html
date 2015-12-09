@@ -37,7 +37,7 @@
 
                     <!-- Navigation -->
 
-                    <div class="collapse navbar-collapse" id="myNavbar" role="navigation">
+                    <nav class="collapse navbar-collapse" id="myNavbar" role="navigation">
                         <ul class="nav navbar-nav navbar-right menu">
 
                             <li ng-if="!isAuthenticated()" ng-class="{active: isActive('Login')}">
@@ -50,17 +50,17 @@
                                     Signup
                                 </a>
                             </li>
-                            <li ng-if="!isAuthenticated()" ng-class="{active: isActive('Search')}">
+                            <li ng-if="isAuthenticated()" ng-class="{active: isActive('Search')}">
                                 <a ng-href="#/search" ng-click="navActive = 'Search'">
                                     Search
                                 </a>
                             </li>
-                            <li ng-if="!isAuthenticated()" ng-class="{active: isActive('Jobs')}">
+                            <li ng-if="isAuthenticated()" ng-class="{active: isActive('Jobs')}">
                                 <a ng-href="#/jobs" ng-click="navActive = 'Jobs'">
                                     Jobs
                                 </a>
                             </li>
-                            <li ng-if="!isAuthenticated()" ng-class="{active: isActive('Review')}">
+                            <li ng-if="isAuthenticated()" ng-class="{active: isActive('Review')}">
                                 <a ng-href="#/review" ng-click="navActive = 'Review'">
                                     Review
                                 </a>

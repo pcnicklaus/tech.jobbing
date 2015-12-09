@@ -8,6 +8,8 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
       $location.path(view); // path not hash
   };
 
+  console.log(userService.user, "<====userservice user")
+
   var scrapedData = [];
 
   // scrape the titles and url 60 off craiglist
@@ -54,8 +56,8 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
    // grab data from indeed from the backend route
    $scope.getIndeed = function () {
       var keyword = userService.user.searchKeyword.replace(' ', '%20');
-      var state   = userService.user.searchState.trim();
-      var city    = userService.user.searchCity.trim();
+      var state   = userService.user.searchState;
+      var city    = userService.user.searchCity;
       var payload = {
         keyword: keyword,
         city: city,
