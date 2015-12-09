@@ -14,4 +14,14 @@ app.controller('navbarCtrl', function($scope, $window, $auth, $location) {
   //         return route === $location.path();
   //     };
 
+  // $scope.navActive = "Home";
+  $scope.isActive = function (id) {
+          if ($scope.navActive === id) {
+              return true;
+              console.log($scope.navActive, id)
+          } else {
+              return false;
+          }
+      };
+
 });

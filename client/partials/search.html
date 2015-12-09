@@ -13,11 +13,12 @@
                        <input type="text" class="form-control" ng-model="newSearchKeyword" placeholder="Keyword">
                    </div>
                    <div class="form-group">
-                       <input type="state" class="form-control" ng-model="newSearchState" placeholder="State">
-                   </div>
-                   <div class="form-group">
                        <input type="city" class="form-control" ng-model="newSearchCity" placeholder="City">
                    </div>
+                   <div class="form-group">
+                       <input type="state" class="form-control" ng-model="newSearchState" placeholder="State">
+                   </div>
+
                    <button class="btn btn-default btn-block" ng-click="updateSearch(); formatAllData(); changeView('jobs')">Update</button>
                </form>
             </div>

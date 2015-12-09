@@ -30,20 +30,52 @@
                         </button>
 
                     <!-- needs attention -->
-                        <a ng-if="!isAuthenticated()" a href="#/" class="navbar-brand logo">Home</a>
-                        <a ng-if="isAuthenticated()" href="#/home" class="navbar-brand logo">Home</a>
+                        <a ng-if="!isAuthenticated()" ng-class="{active: isActive('Home')}" ng-click="navActive = 'Home'"><a href="#/home" class="navbar-brand logo">Home</a>
                     </div>
                 </div>
                 <div class="col-md-8">
+
                     <nav class="collapse navbar-collapse" id="myNavbar" role="navigation">
                         <ul class="nav navbar-nav navbar-right menu">
-                            <li ng-if="!isAuthenticated()" ng-class="{active:isActive('#/login')}"><a href="#/login">Login</a></li>
-                            <li ng-if="!isAuthenticated()" ng-class="{active:isActive('#/signup')}"><a href="#/signup">Signup</a></li>
-                            <li ng-if="isAuthenticated()" ng-class="{active:isActive('#/profile')}"><a href="#/profile">Profile</a></li>
+
+                            <li ng-if="!isAuthenticated()" ng-class="{active: isActive('Login')}">
+                                <a ng-href="#/login" ng-click="navActive = 'Login'">
+                                    Login
+                                </a>
+                            </li>
+                            <li ng-if="!isAuthenticated()" ng-class="{active: isActive('Signup')}">
+                                <a ng-href="#/signup" ng-click="navActive = 'Signup'">
+                                    Signup
+                                </a>
+                            </li>
+                            <li ng-if="!isAuthenticated()" ng-class="{active: isActive('Search')}">
+                                <a ng-href="#/search" ng-click="navActive = 'Search'">
+                                    Search
+                                </a>
+                            </li>
+                            <li ng-if="!isAuthenticated()" ng-class="{active: isActive('Jobs')}">
+                                <a ng-href="#/jobs" ng-click="navActive = 'Jobs'">
+                                    Jobs
+                                </a>
+                            </li>
+                            <li ng-if="!isAuthenticated()" ng-class="{active: isActive('Review')}">
+                                <a ng-href="#/review" ng-click="navActive = 'Review'">
+                                    Review
+                                </a>
+                            </li>
+                            <li ng-if="isAuthenticated()" ng-class="{active: isActive('Logout')}">
+                                <a ng-href="#/home" ng-click="navActive = 'Logout'; logout()">
+                                    Logout
+                                </a>
+                            </li>
+
+                            <!-- <li ng-if="!isAuthenticated()" ng-class="{active:isActive('#/login')}"><a href="#/login">Login</a></li>
+                            <li ng-if="!isAuthenticated()" ng-class="{active:isActive('#/signup')}"><a href="#/signup">Signup</a></li> -->
+                          <!--   <li ng-if="isAuthenticated()" ng-class="{active:isActive('#/profile')}"><a href="#/profile">Profile</a></li>
                             <li ng-if="isAuthenticated()" ng-class="{active:isActive('#/search')}"><a href="#/search">Search</a></li>
                             <li ng-if="isAuthenticated()" ng-class="{active:isActive('#/jobs')}"><a href="#/jobs">Jobs</a></li>
                             <li ng-if="isAuthenticated()" ng-class="{active:isActive('#/review')}"><a href="#/review">Review</a></li>
-                            <li ng-if="isAuthenticated()" ng-class="{active:isActive('#/logout')}"><a ng-click="logout()" href="">Logout</a></li>
+                            <li ng-if="isAuthenticated()" ng-class="{active:isActive('#/logout')}"><a ng-click="logout()" href="">Logout</a></li> -->
                         </ul>
                     </nav>
                 </div>
