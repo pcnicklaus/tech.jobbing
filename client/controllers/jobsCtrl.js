@@ -18,9 +18,10 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
     var searchPhrase = holder.replace(' ', '%20');
 
     var payload = {
-      city:     userService.user.searchCity,
+      city:     userService.user.searchState,
       keyword:  searchPhrase
     };
+    console.log(payload, 'payload');
 
     $http.post('/scrape', payload)
         .success(function(data) {

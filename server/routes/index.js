@@ -81,11 +81,12 @@ router.post('/scrape', function(req, res, next) {
     // var newDater = new Dater({
     //   location: req.body.location
     // });
-    console.log('here')
+    console.log('here 877887')
       var city = req.body.city;
       var keyword = req.body.keyword;
 
     console.log(req.body);
+    // https://denver.craigslist.org/search/sof?query=javascript
     url = 'https://'+ city + '.craigslist.org/search/jjj?sort=date&query=' + keyword;
     console.log(url);
     request(url, function(error, response, html){
@@ -105,7 +106,7 @@ router.post('/scrape', function(req, res, next) {
                 holder = title + ' ' + link;
                 jobs.push(holder);
             });
-            console.log(jobs);
+            // console.log(jobs);
             res.send(jobs);
         }
     });
@@ -143,7 +144,7 @@ router.post('/detail', function(req, res, next) {
             });
             // res.send(jobs);
         }
-        console.log(jobDetail);
+        // console.log(jobDetail);
         res.send(jobDetail);
     });
 });
