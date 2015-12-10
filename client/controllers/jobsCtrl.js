@@ -182,7 +182,7 @@ app.controller('jobsCtrl', ['$scope', '$auth', '$location', '$http', '$uibModal'
 
       for (var i = 0; i < diceDetail.length; i ++) {
           var jobDetail = {};
-          jobDetail.title = dicePre[i].jobTitle;
+          jobDetail.title = dicePre[i].jobtitle;
           jobDetail.description = diceDetail[i].description;
           jobDetail.compensation = '';
           jobDetail.url = dicePre[i].detailUrl;
