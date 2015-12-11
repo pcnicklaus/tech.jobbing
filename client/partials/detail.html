@@ -10,31 +10,43 @@
 
                 <div class="panel panel-default card animated" ng-repeat="job in jobDetail track by $index">
 
-                  <div ng-class='{animatedClassRight: selected, animatedClassLeft: !selected}' ng-if="job.selected === undefined">
-                      <div>
-                        <button class="btn btn-block btn-success" ng-click="switchAnimate(job, true); add($index)">Add it</button>
-                        <button class="btn btn-block btn-danger" ng-click="switchAnimate(job, false); remove(index)">Remove it</button>
+                  <div class="container">
+
+                    <div class="row">
+
+                      <div class="col-xs-1">
+                        <button class="btn btn-block" ng-click="switchAnimate(job, false); remove(index)">Remove it</button>
                       </div>
 
+                      <div class="col-xs-6">
+                          <div ng-class='{animatedClassRight: selected, animatedClassLeft: !selected}' ng-if="job.selected === undefined">
 
-                      <div class="panel-heading">
-                          <h4 class="panel-title">{{job.title}}</h4>
+
+                              <div class="panel-heading">
+                                  <h4 class="panel-title">{{job.title}}</h4>
+                              </div>
+
+                              <div class="panel-body">
+                                  <p class="panel-text">{{job.description}}</p>
+                              </div>
+
+                              <ul class="list-group list-group-flush">
+                                  <a href="{{job.url}}" target="_blank" <li class="list-group-item">Original Posting</li></a>
+                                  <li ng-show="job.compensation"class="list-group-item">{{job.compensation}}</li>
+                              </ul>
+
+                              <div class="panel-footer">
+
+                              </div>
+                          </div>
+                        </div>
+
+                      <div class="col-xs-1">
+                        <button class="btn btn-block btn-primary" ng-click="switchAnimate(job, true); add($index)">Add it</button>
                       </div>
 
-                      <div class="panel-body">
-                          <p class="panel-text">{{job.description}}</p>
-                      </div>
-
-                      <ul class="list-group list-group-flush">
-                          <a href="{{job.url}}" target="_blank" <li class="list-group-item">Original Posting</li></a>
-                          <li ng-show="job.compensation"class="list-group-item">{{job.compensation}}</li>
-                      </ul>
-
-                      <div class="panel-footer">
-
-                      </div>
+                    </div>
                   </div>
-
                 </div>
             </div>
         </div>
