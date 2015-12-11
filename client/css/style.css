@@ -1,6 +1,30 @@
 /*@charset "utf-8";
 /* CSS Document */
 
+.btn-circle.btn-lg {
+  top: 40vh;
+  left: 45vh;
+  position: fixed;
+  width: 90px;
+  height: 90px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 45px;
+}
+
+.btn-circle.btn-lg2 {
+  top: 40vh;
+  position: fixed;
+  width: 90px;
+  height: 90px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 45px;
+}
+
+
 html,
 body {
    margin:0;

@@ -1,13 +1,15 @@
 app.controller('detailCtrl', ['$scope', '$rootScope', '$http', '$window', 'userService', 'jobDetailService', '$timeout', function($scope, $rootScope, $http, $window, userService, jobDetailService, $timeout) {
 
   $scope.selected = true;
+  $scope.accepted = false;
+  $scope.rejected = false;
 
 
-  $scope.switchAnimate = function (job, value) {
-    $scope.selected = value;
-    $scope.$apply();
-    job.selected = value;
-  }
+  // $scope.switchAnimate = function (job, value) {
+  //   $scope.selected = value;
+  //   $scope.$apply();
+  //   job.selected = value;
+  // }
 
   var myInit = function () {
     var indeed = jobDetailService.indeed.formatted || [];
@@ -31,12 +33,19 @@ app.controller('detailCtrl', ['$scope', '$rootScope', '$http', '$window', 'userS
   //   });
   // };
 
-  $scope.remove = function (index) {
-    // $scope.jobDetail.splice(index, 1);
+  $scope.remove = function () {
+    // $scope.rejected = true;
+    // $scope.rejected = false;
+    $scope.jobDetail.splice(index, 1);
+    // $scope.rejected = false;
   };
 
-  $scope.add = function ($index) {
+  $scope.add = function () {
      $scope.jobsToSave.push(this.job);
+     // $scope.jobDetail.splice($index, 1);
+     // $scope.accepted = true;
+     // $scope.accepted = false;
+
      jobDetailService.myJobs = $scope.jobsToSave;
      // $scope.jobDetail.splice($index, 1);
      // $scope.analyze($index);
