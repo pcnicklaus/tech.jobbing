@@ -8,21 +8,20 @@
             </div>
             <div class="col-md-8 col-md-offset-2 parent">
 
-                <div class="panel panel-default card animated" ng-repeat="job in jobDetail track by $index">
-
+                <div class="panel panel-default card animated" ng-class="{slideOutRight: accepted, slideOutLeft: rejected}" ng-repeat="job in jobDetail track by $index">
+                  <p>accepted: {{ accepted }}, rejected: {{ rejected }}</p>
                   <div class="container">
 
                     <div class="row">
 
                       <div class="col-xs-1">
-                        <button class="btn btn-block" ng-click="switchAnimate(job, false); remove(index)">Remove it</button>
+                        <button class="btn-circle btn-lg" ng-mouseup="rejected=true" ng-click="remove($index)"><span class="glyphicon glyphicon-remove-sign"></span></button>
                       </div>
 
                       <div class="col-xs-6">
-                          <div ng-class='{animatedClassRight: selected, animatedClassLeft: !selected}' ng-if="job.selected === undefined">
 
 
-                              <div class="panel-heading">
+                                <div class="panel-heading">
                                   <h4 class="panel-title">{{job.title}}</h4>
                               </div>
 
@@ -38,11 +37,11 @@
                               <div class="panel-footer">
 
                               </div>
-                          </div>
+
                         </div>
 
                       <div class="col-xs-1">
-                        <button class="btn btn-block btn-primary" ng-click="switchAnimate(job, true); add($index)">Add it</button>
+                        <button class="btn-circle btn-lg2 btn-primary" ng-mouseup="accepted=true" ng-click="add($index)"><span class="glyphicon glyphicon-ok"></span></button>
                       </div>
 
                     </div>
