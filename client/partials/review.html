@@ -13,7 +13,7 @@
             <div class="desc col-md-2">
             </div>
             <div class="desc col-md-8">
-                    <div class="panel panel-default" ng-repeat="job in myJobs track by $index">
+                    <div class="panel panel-default animated" ng-class="{slideOutRight: accepted,} slideOutLeft: rejected}" ng-repeat="job in myJobs track by $index">
                         <div class="panel-heading">
                             <h4 class="panel-title">{{job.title}}</h4>
                         </div>
